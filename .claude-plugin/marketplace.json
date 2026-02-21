@@ -32,17 +32,7 @@
         "physics",
         "literature"
       ],
-      "category": "education",
-      "hooks": "./hooks/hooks.json",
-      "mcpServers": {
-        "teacher": {
-          "command": "node",
-          "args": ["${CLAUDE_PLUGIN_ROOT}/mcp-server/dist/bundle.js"],
-          "env": {
-            "NODE_ENV": "production"
-          }
-        }
-      }
+      "category": "education"
     }
   ]
 }
