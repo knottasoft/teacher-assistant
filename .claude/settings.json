@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write(*.md)",
+      "Write(*.json)",
+      "Write(*.csv)",
+      "Write(*.docx)",
+      "Skill",
+      "mcp__teacher__fgos_lookup",
+      "mcp__teacher__export_docx",
+      "mcp__teacher__import_template",
+      "mcp__teacher__hours_calculator",
+      "mcp__teacher__grade_analytics",
+      "Bash(pandoc *)",
+      "Bash(node *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Write(.env)"
+    ]
+  },
+  "env": {
+    "TEACHER_PLUGIN_VERSION": "1.0.0",
+    "DEFAULT_GRADE_SYSTEM": "5-point"
+  }
+}

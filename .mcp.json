@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "teacher": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["mcp-server/dist/index.js"],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}

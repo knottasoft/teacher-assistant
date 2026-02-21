@@ -1,0 +1,6 @@
+node_modules/
+dist/
+user-data/
+.env
+*.docx.tmp
+.DS_Store

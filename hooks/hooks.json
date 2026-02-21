@@ -1,0 +1,25 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"plugin\": \"teacher-assistant\", \"version\": \"1.0.0\", \"subjects\": [\"Русский язык\", \"Математика\", \"Физика\", \"Литература\"], \"grades\": \"5-11\", \"commands\": [\"/lesson-plan\", \"/assignment\", \"/check-work\", \"/thematic-plan\", \"/fgos-check\", \"/grade-report\", \"/dictation\", \"/grammar-exercise\", \"/essay-evaluate\", \"/math-problems\", \"/math-test\", \"/math-check\", \"/physics-problems\", \"/physics-lab\", \"/literature-questions\", \"/essay-topics\", \"/export-doc\", \"/import-template\"]}'"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Если только что созданный файл является учебным документом (план урока, задание, тест, КТП), кратко проверь: (1) указан ли предмет и класс, (2) есть ли привязка к ФГОС/планируемым результатам, (3) корректно ли оформление. Верни {\"ok\": true} если всё в порядке, или {\"ok\": false, \"issues\": [\"...\"]} если есть замечания."
+          }
+        ]
+      }
+    ]
+  }
+}

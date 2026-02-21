@@ -1,0 +1,21 @@
+{
+  "name": "@teacher-assistant/mcp-server",
+  "version": "1.0.0",
+  "description": "MCP-сервер для плагина «Учитель» — инструменты для преподавателей (ФГОС, экспорт DOCX, аналитика оценок)",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "docx": "^9.1.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  }
+}
