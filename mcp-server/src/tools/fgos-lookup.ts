@@ -1,10 +1,10 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { readFileSync } from "fs";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import russianData from "../data/fgos/russian.json" with { type: "json" };
+import mathData from "../data/fgos/math.json" with { type: "json" };
+import physicsData from "../data/fgos/physics.json" with { type: "json" };
+import literatureData from "../data/fgos/literature.json" with { type: "json" };
 
 interface Topic {
   name: string;
@@ -46,11 +46,11 @@ interface FgosData {
   [key: string]: unknown;
 }
 
-const SUBJECT_FILES: Record<string, string> = {
-  russian: "russian.json",
-  math: "math.json",
-  physics: "physics.json",
-  literature: "literature.json",
+const FGOS_DATA: Record<string, FgosData> = {
+  russian: russianData as unknown as FgosData,
+  math: mathData as unknown as FgosData,
+  physics: physicsData as unknown as FgosData,
+  literature: literatureData as unknown as FgosData,
 };
 
 const SUBJECT_ALIASES: Record<string, string> = {
@@ -69,16 +69,7 @@ function resolveSubject(input: string): string {
 }
 
 function loadFgosData(subjectId: string): FgosData | null {
-  const filename = SUBJECT_FILES[subjectId];
-  if (!filename) return null;
-
-  const filePath = join(__dirname, "..", "data", "fgos", filename);
-  try {
-    const raw = readFileSync(filePath, "utf-8");
-    return JSON.parse(raw) as FgosData;
-  } catch {
-    return null;
-  }
+  return FGOS_DATA[subjectId] || null;
 }
 
 export function registerFgosLookupTool(server: McpServer): void {

@@ -21,12 +21,12 @@
 claude plugin install https://github.com/knottasoft/teacher-assistant.git
 ```
 
-Или клонировать вручную и открыть папку в Claude Code:
+Или клонировать и открыть в Claude Code (**npm не требуется**, бандл pre-built):
 
 ```bash
 git clone https://github.com/knottasoft/teacher-assistant.git
 cd teacher-assistant
-bash setup.sh
+bash setup.sh   # проверяет только наличие Node.js >= 18
 ```
 
 ### Claude Code — только MCP-сервер

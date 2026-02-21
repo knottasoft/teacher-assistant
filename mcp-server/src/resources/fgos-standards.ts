@@ -1,16 +1,23 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { readFileSync } from "fs";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import russianData from "../data/fgos/russian.json" with { type: "json" };
+import mathData from "../data/fgos/math.json" with { type: "json" };
+import physicsData from "../data/fgos/physics.json" with { type: "json" };
+import literatureData from "../data/fgos/literature.json" with { type: "json" };
 
-const SUBJECTS = ["russian", "math", "physics", "literature"];
+const SUBJECTS = ["russian", "math", "physics", "literature"] as const;
 const SUBJECT_NAMES: Record<string, string> = {
   russian: "Русский язык",
   math: "Математика",
   physics: "Физика",
   literature: "Литература",
+};
+
+const FGOS_DATA: Record<string, { grades?: Record<string, unknown> }> = {
+  russian: russianData,
+  math: mathData,
+  physics: physicsData,
+  literature: literatureData,
 };
 
 export function registerFgosResources(server: McpServer): void {
@@ -22,52 +29,38 @@ export function registerFgosResources(server: McpServer): void {
       const name = `ФГОС: ${SUBJECT_NAMES[subject]}, ${grade} класс`;
 
       server.resource(uri, name, async () => {
-        const filePath = join(__dirname, "..", "data", "fgos", `${subject}.json`);
-        try {
-          const raw = readFileSync(filePath, "utf-8");
-          const data = JSON.parse(raw);
-          const gradeData = data.grades?.[String(grade)];
+        const data = FGOS_DATA[subject];
+        const gradeData = data?.grades?.[String(grade)];
 
-          if (!gradeData) {
-            return {
-              contents: [
-                {
-                  uri,
-                  mimeType: "text/plain",
-                  text: `Данные для ${grade} класса не найдены.`,
-                },
-              ],
-            };
-          }
-
-          return {
-            contents: [
-              {
-                uri,
-                mimeType: "application/json",
-                text: JSON.stringify(
-                  {
-                    subject: SUBJECT_NAMES[subject],
-                    grade,
-                    ...gradeData,
-                  },
-                  null,
-                  2
-                ),
-              },
-            ],
-          };
-        } catch {
+        if (!gradeData) {
           return {
             contents: [
               {
                 uri,
                 mimeType: "text/plain",
-                text: `Ошибка загрузки данных ФГОС для ${SUBJECT_NAMES[subject]}, ${grade} класс.`,
+                text: `Данные для ${grade} класса не найдены.`,
               },
             ],
           };
         }
+
+        return {
+          contents: [
+            {
+              uri,
+              mimeType: "application/json",
+              text: JSON.stringify(
+                {
+                  subject: SUBJECT_NAMES[subject],
+                  grade,
+                  ...(gradeData as Record<string, unknown>),
+                },
+                null,
+                2
+              ),
+            },
+          ],
+        };
       });
     }
   }

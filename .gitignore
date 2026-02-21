@@ -1,5 +1,4 @@
 node_modules/
-dist/
 user-data/
 .env
 *.docx.tmp
@@ -7,3 +6,11 @@ user-data/
 .DS_Store
 *.log
 coverage/
+
+# Keep only the bundle in dist/, ignore intermediate build artifacts
+mcp-server/dist/*.js.map
+mcp-server/dist/*.d.ts
+mcp-server/dist/tools/
+mcp-server/dist/resources/
+mcp-server/dist/data/
+mcp-server/dist/bundle.tmp.js

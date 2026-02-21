@@ -1,16 +1,16 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { readFileSync } from "fs";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import russianData from "../data/fgos/russian.json" with { type: "json" };
+import mathData from "../data/fgos/math.json" with { type: "json" };
+import physicsData from "../data/fgos/physics.json" with { type: "json" };
+import literatureData from "../data/fgos/literature.json" with { type: "json" };
 
-const SUBJECT_FILES: Record<string, string> = {
-  russian: "russian.json",
-  math: "math.json",
-  physics: "physics.json",
-  literature: "literature.json",
+const FGOS_DATA: Record<string, { grades?: Record<string, { hours_per_week?: number }> }> = {
+  russian: russianData,
+  math: mathData,
+  physics: physicsData,
+  literature: literatureData,
 };
 
 const SUBJECT_ALIASES: Record<string, string> = {
@@ -53,21 +53,15 @@ export function registerHoursCalculatorTool(server: McpServer): void {
     },
     async ({ subject, grade, period, hours_per_week }) => {
       const subjectId = resolveSubject(subject);
-      const filename = SUBJECT_FILES[subjectId];
-
       let standardHoursPerWeek = hours_per_week;
 
-      if (!standardHoursPerWeek && filename) {
-        try {
-          const filePath = join(__dirname, "..", "data", "fgos", filename);
-          const raw = readFileSync(filePath, "utf-8");
-          const data = JSON.parse(raw);
+      if (!standardHoursPerWeek) {
+        const data = FGOS_DATA[subjectId];
+        if (data) {
           const gradeData = data.grades?.[String(grade)];
           if (gradeData) {
             standardHoursPerWeek = gradeData.hours_per_week;
           }
-        } catch {
-          // Use default
         }
       }
 

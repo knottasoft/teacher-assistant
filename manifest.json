@@ -13,10 +13,10 @@
   "homepage": "https://github.com/knottasoft/teacher-assistant",
   "server": {
     "type": "node",
-    "entry_point": "mcp-server/dist/index.js",
+    "entry_point": "mcp-server/dist/bundle.js",
     "mcp_config": {
       "command": "node",
-      "args": ["mcp-server/dist/index.js"],
+      "args": ["mcp-server/dist/bundle.js"],
       "env": {
         "NODE_ENV": "production"
       }

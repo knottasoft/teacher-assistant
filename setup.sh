@@ -27,20 +27,14 @@ if [ "$NODE_VERSION" -lt 18 ]; then
 fi
 echo -e "${GREEN}✓${NC} Node.js $(node -v)"
 
-# Install MCP server dependencies
-echo ""
-echo "Установка зависимостей MCP-сервера..."
-cd mcp-server
-npm install --production=false
-echo -e "${GREEN}✓${NC} Зависимости установлены"
-
-# Build MCP server
-echo ""
-echo "Сборка MCP-сервера..."
-npm run build
-echo -e "${GREEN}✓${NC} MCP-сервер собран"
-
-cd ..
+# Check bundle exists (pre-built, no npm required)
+BUNDLE="mcp-server/dist/bundle.js"
+if [ ! -f "$BUNDLE" ]; then
+    echo -e "${RED}Бандл MCP-сервера не найден: ${BUNDLE}${NC}"
+    echo "  Пересоберите: cd mcp-server && npm install && npm run build"
+    exit 1
+fi
+echo -e "${GREEN}✓${NC} MCP-сервер (pre-built bundle)"
 
 # Create user-data directories
 mkdir -p user-data/grade-book user-data/templates
@@ -48,8 +42,8 @@ echo -e "${GREEN}✓${NC} Рабочие директории созданы"
 
 # Verify MCP server starts
 echo ""
-echo "Проверка запуска MCP-сервера..."
-if timeout 3 node mcp-server/dist/index.js < /dev/null 2>/dev/null; then
+echo "Проверка запуска..."
+if timeout 3 node "$BUNDLE" < /dev/null 2>/dev/null; then
     true
 fi
 echo -e "${GREEN}✓${NC} MCP-сервер работает"
@@ -57,7 +51,7 @@ echo -e "${GREEN}✓${NC} MCP-сервер работает"
 # Print instructions
 echo ""
 echo "========================================="
-echo -e "${GREEN}  Установка завершена!${NC}"
+echo -e "${GREEN}  Готово! npm не требуется.${NC}"
 echo "========================================="
 echo ""
 echo "Способы использования:"
@@ -67,10 +61,7 @@ echo "     Откройте эту папку в Claude Code."
 echo "     Плагин подключится автоматически."
 echo ""
 echo -e "  ${YELLOW}2. Claude Code (глобально):${NC}"
-echo "     claude mcp add teacher -- node $(pwd)/mcp-server/dist/index.js"
-echo ""
-echo -e "  ${YELLOW}3. npx (после npm publish):${NC}"
-echo "     claude mcp add teacher -- npx @knottasoft/teacher-assistant-mcp"
+echo "     claude mcp add teacher -- node $(pwd)/${BUNDLE}"
 echo ""
 echo "Попробуйте: /lesson-plan математика 7 \"Формулы сокращённого умножения\""
 echo ""
