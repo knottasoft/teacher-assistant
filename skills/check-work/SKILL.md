@@ -26,5 +26,5 @@ user-invocable: true
    - **Рекомендации по улучшению**
 7. Сохрани результат проверки в файл `проверка_[имя_ученика]_[тема].md`
 
-Критерии оценивания: @evaluation-criteria.md
-Шаблоны обратной связи: @feedback-templates.md
+Критерии оценивания: [evaluation-criteria.md](evaluation-criteria.md)
+Шаблоны обратной связи: [feedback-templates.md](feedback-templates.md)

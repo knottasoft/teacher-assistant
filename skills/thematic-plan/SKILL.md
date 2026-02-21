@@ -31,5 +31,5 @@ user-invocable: true
 6. Выдели уроки повторения и обобщения
 7. Сохрани в табличном формате в файл `ктп_[предмет]_[класс]_[период].md`
 
-Шаблоны: @templates/
-Распределение часов: @hours-distribution.md
+Шаблоны: [templates/](templates/)
+Распределение часов: [hours-distribution.md](hours-distribution.md)

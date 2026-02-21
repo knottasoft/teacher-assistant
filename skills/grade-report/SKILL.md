@@ -37,4 +37,4 @@ user-invocable: true
 
 4. Сохрани отчёт в файл `отчёт_успеваемость_[класс].md`
 
-Шаблоны отчётов: @report-templates.md
+Шаблоны отчётов: [report-templates.md](report-templates.md)

@@ -4,6 +4,7 @@ description: Экспортировать Markdown-файл в формат DOCX
 argument-hint: "[путь к .md файлу]"
 allowed-tools: Read, mcp__teacher__export_docx
 user-invocable: true
+disable-model-invocation: true
 ---
 
 # Экспорт в DOCX

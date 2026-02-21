@@ -1,24 +1,5 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-
-import russianData from "../data/fgos/russian.json" with { type: "json" };
-import mathData from "../data/fgos/math.json" with { type: "json" };
-import physicsData from "../data/fgos/physics.json" with { type: "json" };
-import literatureData from "../data/fgos/literature.json" with { type: "json" };
-
-const SUBJECTS = ["russian", "math", "physics", "literature"] as const;
-const SUBJECT_NAMES: Record<string, string> = {
-  russian: "Русский язык",
-  math: "Математика",
-  physics: "Физика",
-  literature: "Литература",
-};
-
-const FGOS_DATA: Record<string, { grades?: Record<string, unknown> }> = {
-  russian: russianData,
-  math: mathData,
-  physics: physicsData,
-  literature: literatureData,
-};
+import { SUBJECTS, SUBJECT_NAMES, FGOS_DATA } from "../data/shared.js";
 
 export function registerFgosResources(server: McpServer): void {
   for (const subject of SUBJECTS) {

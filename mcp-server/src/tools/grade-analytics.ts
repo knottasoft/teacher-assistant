@@ -1,6 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { readFileSync, existsSync } from "fs";
+import { readFile } from "fs/promises";
+import { existsSync } from "fs";
 
 interface GradeEntry {
   student: string;
@@ -72,7 +73,7 @@ export function registerGradeAnalyticsTool(server: McpServer): void {
         };
       }
 
-      const content = readFileSync(data_path, "utf-8");
+      const content = await readFile(data_path, "utf-8");
       let entries: GradeEntry[];
 
       try {

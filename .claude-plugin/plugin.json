@@ -1,7 +1,7 @@
 {
   "name": "teacher-assistant",
-  "version": "1.0.0",
   "description": "AI-ассистент для преподавателей средней и старшей школы (5-11 классы). Планы уроков, задания, проверка работ, КТП, аналитика оценок. Полное соответствие ФГОС.",
+  "version": "1.0.0",
   "author": {
     "name": "knottasoft",
     "url": "https://github.com/knottasoft"
@@ -9,18 +9,5 @@
   "license": "MIT",
   "repository": "https://github.com/knottasoft/teacher-assistant",
   "homepage": "https://github.com/knottasoft/teacher-assistant#readme",
-  "keywords": [
-    "teacher",
-    "education",
-    "school",
-    "fgos",
-    "lesson-plan",
-    "grading",
-    "russian",
-    "math",
-    "physics",
-    "literature",
-    "mcp",
-    "claude-code"
-  ]
+  "keywords": ["teacher", "education", "school", "fgos", "lesson-plan", "grading"]
 }

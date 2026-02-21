@@ -44,4 +44,4 @@ user-invocable: true
    - `диктант_[класс]_[тема].md` — для диктовки
    - `диктант_[класс]_[тема]_учитель.md` — лист для учителя
 
-Уровни сложности: @difficulty-levels.md
+Уровни сложности: [difficulty-levels.md](difficulty-levels.md)

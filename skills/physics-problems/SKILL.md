@@ -38,4 +38,4 @@ user-invocable: true
    - `задачи_физика_[класс]_[тема].md` — условия
    - `задачи_физика_[класс]_[тема]_решения.md` — решения
 
-Справочник формул: @formulas-reference.md
+Справочник формул: [formulas-reference.md](formulas-reference.md)

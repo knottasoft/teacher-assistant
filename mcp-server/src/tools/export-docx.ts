@@ -1,7 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { readFileSync, writeFileSync, existsSync } from "fs";
-import { join, dirname, basename } from "path";
+import { readFile, writeFile } from "fs/promises";
+import { existsSync } from "fs";
 import {
   Document,
   Packer,
@@ -16,9 +16,11 @@ import {
   BorderStyle,
 } from "docx";
 
-function parseMarkdownToDocx(markdown: string): Paragraph[] {
+type DocxElement = Paragraph | Table;
+
+export function parseMarkdownToDocx(markdown: string): DocxElement[] {
   const lines = markdown.split("\n");
-  const paragraphs: Paragraph[] = [];
+  const elements: DocxElement[] = [];
   let inTable = false;
   const tableRows: string[][] = [];
 
@@ -28,7 +30,7 @@ function parseMarkdownToDocx(markdown: string): Paragraph[] {
     // Skip empty lines
     if (line.trim() === "") {
       if (inTable && tableRows.length > 0) {
-        paragraphs.push(...createTable(tableRows));
+        elements.push(...createTable(tableRows));
         tableRows.length = 0;
         inTable = false;
       }
@@ -37,7 +39,7 @@ function parseMarkdownToDocx(markdown: string): Paragraph[] {
 
     // Headers
     if (line.startsWith("# ")) {
-      paragraphs.push(
+      elements.push(
         new Paragraph({
           text: line.replace(/^# /, ""),
           heading: HeadingLevel.HEADING_1,
@@ -47,7 +49,7 @@ function parseMarkdownToDocx(markdown: string): Paragraph[] {
       continue;
     }
     if (line.startsWith("## ")) {
-      paragraphs.push(
+      elements.push(
         new Paragraph({
           text: line.replace(/^## /, ""),
           heading: HeadingLevel.HEADING_2,
@@ -57,7 +59,7 @@ function parseMarkdownToDocx(markdown: string): Paragraph[] {
       continue;
     }
     if (line.startsWith("### ")) {
-      paragraphs.push(
+      elements.push(
         new Paragraph({
           text: line.replace(/^### /, ""),
           heading: HeadingLevel.HEADING_3,
@@ -84,7 +86,7 @@ function parseMarkdownToDocx(markdown: string): Paragraph[] {
     if (line.match(/^[\s]*[-*]\s/)) {
       const indent = line.search(/\S/);
       const text = line.replace(/^[\s]*[-*]\s/, "");
-      paragraphs.push(
+      elements.push(
         new Paragraph({
           children: parseInlineFormatting(text),
           bullet: { level: Math.min(Math.floor(indent / 2), 3) },
@@ -97,7 +99,7 @@ function parseMarkdownToDocx(markdown: string): Paragraph[] {
     // Numbered lists
     if (line.match(/^[\s]*\d+\.\s/)) {
       const text = line.replace(/^[\s]*\d+\.\s/, "");
-      paragraphs.push(
+      elements.push(
         new Paragraph({
           children: parseInlineFormatting(text),
           numbering: { reference: "default-numbering", level: 0 },
@@ -109,13 +111,13 @@ function parseMarkdownToDocx(markdown: string): Paragraph[] {
 
     // Flush table if transitioning away
     if (inTable && tableRows.length > 0) {
-      paragraphs.push(...createTable(tableRows));
+      elements.push(...createTable(tableRows));
       tableRows.length = 0;
       inTable = false;
     }
 
     // Regular paragraph
-    paragraphs.push(
+    elements.push(
       new Paragraph({
         children: parseInlineFormatting(line),
         spacing: { before: 60, after: 60 },
@@ -125,13 +127,13 @@ function parseMarkdownToDocx(markdown: string): Paragraph[] {
 
   // Flush remaining table
   if (tableRows.length > 0) {
-    paragraphs.push(...createTable(tableRows));
+    elements.push(...createTable(tableRows));
   }
 
-  return paragraphs;
+  return elements;
 }
 
-function parseInlineFormatting(text: string): TextRun[] {
+export function parseInlineFormatting(text: string): TextRun[] {
   const runs: TextRun[] = [];
   const regex = /(\*\*(.+?)\*\*)|(\*(.+?)\*)|(`(.+?)`)|([^*`]+)/g;
   let match;
@@ -155,7 +157,7 @@ function parseInlineFormatting(text: string): TextRun[] {
   return runs;
 }
 
-function createTable(rows: string[][]): Paragraph[] {
+export function createTable(rows: string[][]): DocxElement[] {
   if (rows.length === 0) return [];
 
   const maxCols = Math.max(...rows.map((r) => r.length));
@@ -197,12 +199,7 @@ function createTable(rows: string[][]): Paragraph[] {
     width: { size: 9000, type: WidthType.DXA },
   });
 
-  // Tables cannot be directly added as Paragraph, so we wrap in a workaround
-  // Actually, docx library handles Table as a top-level element
-  // We return the table serialized as a paragraph placeholder
-  return [
-    new Paragraph({ text: "" }), // spacer
-  ];
+  return [table];
 }
 
 export function registerExportDocxTool(server: McpServer): void {
@@ -226,8 +223,8 @@ export function registerExportDocxTool(server: McpServer): void {
         };
       }
 
-      const markdown = readFileSync(input_path, "utf-8");
-      const paragraphs = parseMarkdownToDocx(markdown);
+      const markdown = await readFile(input_path, "utf-8");
+      const elements = parseMarkdownToDocx(markdown);
 
       const doc = new Document({
         sections: [
@@ -242,7 +239,7 @@ export function registerExportDocxTool(server: McpServer): void {
                 },
               },
             },
-            children: paragraphs,
+            children: elements,
           },
         ],
       });
@@ -252,7 +249,7 @@ export function registerExportDocxTool(server: McpServer): void {
         input_path.replace(/\.md$/, ".docx");
 
       const buffer = await Packer.toBuffer(doc);
-      writeFileSync(finalPath, buffer);
+      await writeFile(finalPath, buffer);
 
       return {
         content: [

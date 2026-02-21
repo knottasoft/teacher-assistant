@@ -4,6 +4,7 @@ description: Импортировать пользовательский шаб�
 argument-hint: "[путь к шаблону] [тип: план|тест|ктп|отчёт]"
 allowed-tools: Read, Write, mcp__teacher__import_template
 user-invocable: true
+disable-model-invocation: true
 ---
 
 # Импорт шаблона

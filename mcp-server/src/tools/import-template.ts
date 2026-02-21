@@ -1,6 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
+import { readFile, writeFile, mkdir } from "fs/promises";
+import { existsSync } from "fs";
 import { join, basename, extname } from "path";
 
 const USER_TEMPLATES_DIR = join(process.cwd(), "user-data", "templates");
@@ -14,7 +15,7 @@ interface TemplateMetadata {
   structure: string[];
 }
 
-function analyzeMarkdownStructure(content: string): string[] {
+export function analyzeMarkdownStructure(content: string): string[] {
   const structure: string[] = [];
   const lines = content.split("\n");
 
@@ -58,16 +59,16 @@ export function registerImportTemplateTool(server: McpServer): void {
       }
 
       // Ensure templates directory exists
-      mkdirSync(USER_TEMPLATES_DIR, { recursive: true });
+      await mkdir(USER_TEMPLATES_DIR, { recursive: true });
 
-      const content = readFileSync(template_path, "utf-8");
+      const content = await readFile(template_path, "utf-8");
       const ext = extname(template_path);
       const originalName = basename(template_path);
       const targetName = `${doc_type}${ext}`;
       const targetPath = join(USER_TEMPLATES_DIR, targetName);
 
       // Copy template
-      writeFileSync(targetPath, content, "utf-8");
+      await writeFile(targetPath, content, "utf-8");
 
       // Analyze structure
       const structure = analyzeMarkdownStructure(content);
@@ -83,7 +84,7 @@ export function registerImportTemplateTool(server: McpServer): void {
       };
 
       const metadataPath = join(USER_TEMPLATES_DIR, `${doc_type}.meta.json`);
-      writeFileSync(metadataPath, JSON.stringify(metadata, null, 2), "utf-8");
+      await writeFile(metadataPath, JSON.stringify(metadata, null, 2), "utf-8");
 
       return {
         content: [
