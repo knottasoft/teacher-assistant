@@ -1,13 +1,28 @@
 {
-  "name": "@teacher-assistant/mcp-server",
+  "name": "@knottasoft/teacher-assistant-mcp",
   "version": "1.0.0",
-  "description": "MCP-сервер для плагина «Учитель» — инструменты для преподавателей (ФГОС, экспорт DOCX, аналитика оценок)",
+  "description": "MCP server for Teacher Assistant — FGOS lookup, DOCX export, grade analytics, academic hours calculator",
   "type": "module",
   "main": "dist/index.js",
+  "bin": {
+    "teacher-assistant-mcp": "dist/index.js"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist/",
+    "src/data/"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
@@ -15,7 +30,25 @@
     "zod": "^3.24.0"
   },
   "devDependencies": {
+    "@types/node": "^22.0.0",
     "typescript": "^5.7.0",
-    "@types/node": "^22.0.0"
-  }
+    "vitest": "^4.0.18"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/knottasoft/teacher-assistant.git",
+    "directory": "mcp-server"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "claude",
+    "teacher",
+    "fgos",
+    "education"
+  ]
 }

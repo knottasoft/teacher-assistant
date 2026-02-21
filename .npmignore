@@ -1,0 +1,25 @@
+# Source files (compiled dist/ is included)
+mcp-server/src/
+mcp-server/node_modules/
+mcp-server/tsconfig.json
+
+# Development
+.github/
+scripts/
+schemas/
+*.test.ts
+*.spec.ts
+__tests__/
+
+# User data
+user-data/
+
+# System
+.DS_Store
+.env
+*.docx.tmp
+*.log
+
+# Git
+.git/
+.gitignore

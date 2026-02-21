@@ -1,0 +1,62 @@
+{
+  "name": "@knottasoft/teacher-assistant",
+  "version": "1.0.0",
+  "description": "Claude Code plugin — AI teaching assistant for Russian schools (grades 5-11). Lesson plans, assignments, grading, FGOS compliance.",
+  "keywords": [
+    "claude-code",
+    "claude-code-plugin",
+    "mcp",
+    "mcp-server",
+    "teacher",
+    "education",
+    "school",
+    "fgos",
+    "russian-education",
+    "lesson-plan",
+    "assignments",
+    "grading"
+  ],
+  "author": {
+    "name": "knottasoft",
+    "url": "https://github.com/knottasoft"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/knottasoft/teacher-assistant.git"
+  },
+  "homepage": "https://github.com/knottasoft/teacher-assistant#readme",
+  "bugs": {
+    "url": "https://github.com/knottasoft/teacher-assistant/issues"
+  },
+  "type": "module",
+  "bin": {
+    "teacher-assistant-mcp": "mcp-server/dist/index.js"
+  },
+  "files": [
+    "mcp-server/dist/",
+    "mcp-server/src/data/",
+    "mcp-server/package.json",
+    "skills/",
+    ".claude/",
+    "hooks/",
+    "CLAUDE.md",
+    "plugin.json",
+    ".mcp.json",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "npm run build --prefix mcp-server",
+    "test": "npm test --prefix mcp-server",
+    "lint": "npm run lint --prefix mcp-server",
+    "typecheck": "npm run typecheck --prefix mcp-server",
+    "prepare": "npm run build",
+    "validate": "node scripts/validate-fgos.mjs",
+    "setup": "bash setup.sh"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/knottasoft/teacher-assistant/schemas/fgos.schema.json",
+  "title": "FGOS Subject Data",
+  "description": "Schema for FGOS curriculum data files used by Teacher Assistant MCP server",
+  "type": "object",
+  "required": ["subject", "subject_id", "grades"],
+  "properties": {
+    "subject": {
+      "type": "string",
+      "description": "Subject name in Russian"
+    },
+    "subject_id": {
+      "type": "string",
+      "description": "Subject identifier (english)",
+      "enum": ["russian", "math", "physics", "literature"]
+    },
+    "grades": {
+      "type": "object",
+      "description": "Grade-level curriculum data",
+      "patternProperties": {
+        "^([5-9]|1[01])$": {
+          "$ref": "#/$defs/gradeData"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "gradeData": {
+      "type": "object",
+      "required": ["level", "hours_per_week", "total_hours_per_year", "sections"],
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["ООО", "СОО"],
+          "description": "Education level (ООО = основное общее, СОО = среднее общее)"
+        },
+        "hours_per_week": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "total_hours_per_year": {
+          "type": "integer",
+          "minimum": 34,
+          "maximum": 350
+        },
+        "sections": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/section" },
+          "minItems": 1
+        },
+        "control_works": {
+          "type": "object"
+        }
+      }
+    },
+    "section": {
+      "type": "object",
+      "required": ["name", "hours", "topics"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hours": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "topics": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/topic" },
+          "minItems": 1
+        }
+      }
+    },
+    "topic": {
+      "type": "object",
+      "required": ["name", "hours", "planned_results", "uud", "control_types"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hours": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "planned_results": {
+          "$ref": "#/$defs/plannedResults"
+        },
+        "uud": {
+          "$ref": "#/$defs/uud"
+        },
+        "control_types": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "plannedResults": {
+      "type": "object",
+      "required": ["subject", "meta", "personal"],
+      "properties": {
+        "subject": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "meta": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "personal": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "uud": {
+      "type": "object",
+      "required": ["cognitive", "regulative", "communicative", "personal"],
+      "properties": {
+        "cognitive": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "regulative": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "communicative": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "personal": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

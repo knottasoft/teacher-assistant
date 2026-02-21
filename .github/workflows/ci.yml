@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+          cache-dependency-path: mcp-server/package-lock.json
+
+      - name: Install dependencies
+        working-directory: mcp-server
+        run: npm ci
+
+      - name: Type check
+        working-directory: mcp-server
+        run: npm run typecheck
+
+      - name: Build
+        working-directory: mcp-server
+        run: npm run build
+
+      - name: Test
+        working-directory: mcp-server
+        run: npm test
+
+      - name: Validate FGOS data
+        run: node scripts/validate-fgos.mjs
+
+  validate-skills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check all SKILL.md files have required frontmatter
+        run: |
+          errors=0
+          for skill in skills/*/SKILL.md; do
+            if ! head -1 "$skill" | grep -q '^---'; then
+              echo "ERROR: $skill missing YAML frontmatter"
+              errors=$((errors + 1))
+            fi
+            for field in name description argument-hint; do
+              if ! grep -q "^${field}:" "$skill"; then
+                echo "ERROR: $skill missing field: $field"
+                errors=$((errors + 1))
+              fi
+            done
+          done
+          if [ $errors -gt 0 ]; then
+            echo "Found $errors errors in skill files"
+            exit 1
+          fi
+          echo "All skill files valid"

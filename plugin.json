@@ -1,10 +1,37 @@
 {
   "name": "teacher-assistant",
+  "displayName": "Учитель — Ассистент преподавателя",
   "version": "1.0.0",
-  "description": "Плагин-ассистент для преподавателей средней и старшей школы (5-11 классы). Помогает с составлением планов уроков, созданием заданий, проверкой работ, тематическим планированием. Соответствует ФГОС ООО и ФГОС СОО.",
-  "author": "knottasoft",
+  "description": "AI-ассистент для преподавателей средней и старшей школы (5-11 классы). Планы уроков, задания, проверка работ, КТП, аналитика оценок. Полное соответствие ФГОС.",
+  "description_en": "AI teaching assistant for Russian schools (grades 5-11). Lesson plans, assignments, grading, thematic planning, FGOS compliance.",
+  "author": {
+    "name": "knottasoft",
+    "url": "https://github.com/knottasoft"
+  },
   "license": "MIT",
   "repository": "https://github.com/knottasoft/teacher-assistant",
+  "homepage": "https://github.com/knottasoft/teacher-assistant#readme",
+  "categories": [
+    "education",
+    "productivity",
+    "content-generation"
+  ],
+  "tags": [
+    "teacher",
+    "school",
+    "education",
+    "fgos",
+    "lesson-plan",
+    "grading",
+    "russian",
+    "math",
+    "physics",
+    "literature",
+    "mcp",
+    "claude-code"
+  ],
+  "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxMiIgZmlsbD0iIzIxNjNFOCIvPjx0ZXh0IHg9IjMyIiB5PSI0NCIgZm9udC1zaXplPSIzNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPvCfk5o8L3RleHQ+PC9zdmc+",
+  "minClaudeCodeVersion": "2.0.0",
   "subjects": [
     {
       "id": "russian",
@@ -30,5 +57,44 @@
   "standards": [
     "ФГОС ООО (приказ Минпросвещения №287 от 31.05.2021)",
     "ФГОС СОО (приказ Минпросвещения №732 от 12.08.2022)"
-  ]
+  ],
+  "skills": [
+    "lesson-plan",
+    "assignment",
+    "check-work",
+    "thematic-plan",
+    "fgos-check",
+    "grade-report",
+    "dictation",
+    "grammar-exercise",
+    "essay-evaluate",
+    "math-problems",
+    "math-test",
+    "math-check",
+    "physics-problems",
+    "physics-lab",
+    "literature-questions",
+    "essay-topics",
+    "export-doc",
+    "import-template"
+  ],
+  "mcpTools": [
+    "fgos_lookup",
+    "export_docx",
+    "import_template",
+    "hours_calculator",
+    "grade_analytics"
+  ],
+  "mcpResources": [
+    "fgos://{subject}/{grade}",
+    "curriculum://{subject}"
+  ],
+  "install": {
+    "steps": [
+      "git clone https://github.com/knottasoft/teacher-assistant.git",
+      "cd teacher-assistant && bash setup.sh"
+    ],
+    "npm": "npm install @knottasoft/teacher-assistant",
+    "mcp": "claude mcp add teacher -- npx @knottasoft/teacher-assistant-mcp"
+  }
 }

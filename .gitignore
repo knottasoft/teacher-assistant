@@ -3,4 +3,7 @@ dist/
 user-data/
 .env
 *.docx.tmp
+*.docx
 .DS_Store
+*.log
+coverage/
