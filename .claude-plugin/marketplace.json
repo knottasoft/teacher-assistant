@@ -1,0 +1,68 @@
+{
+  "name": "knottasoft-education",
+  "owner": {
+    "name": "knottasoft",
+    "email": "knottasoft@github.com"
+  },
+  "metadata": {
+    "description": "Плагины для образования — ассистенты преподавателей российских школ",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "teacher-assistant",
+      "source": ".",
+      "description": "AI-ассистент преподавателя (5-11 классы). 18 команд для 4 предметов. Планы уроков, задания, проверка работ, КТП, аналитика оценок. ФГОС ООО и СОО.",
+      "version": "1.0.0",
+      "author": {
+        "name": "knottasoft"
+      },
+      "homepage": "https://github.com/knottasoft/teacher-assistant",
+      "repository": "https://github.com/knottasoft/teacher-assistant",
+      "license": "MIT",
+      "keywords": [
+        "teacher",
+        "education",
+        "school",
+        "fgos",
+        "lesson-plan",
+        "grading",
+        "russian",
+        "math",
+        "physics",
+        "literature"
+      ],
+      "category": "learning",
+      "skills": [
+        "./skills/lesson-plan",
+        "./skills/assignment",
+        "./skills/check-work",
+        "./skills/thematic-plan",
+        "./skills/fgos-check",
+        "./skills/grade-report",
+        "./skills/dictation",
+        "./skills/grammar-exercise",
+        "./skills/essay-evaluate",
+        "./skills/math-problems",
+        "./skills/math-test",
+        "./skills/math-check",
+        "./skills/physics-problems",
+        "./skills/physics-lab",
+        "./skills/literature-questions",
+        "./skills/essay-topics",
+        "./skills/export-doc",
+        "./skills/import-template"
+      ],
+      "hooks": "./hooks/hooks.json",
+      "mcpServers": {
+        "teacher": {
+          "command": "node",
+          "args": ["${CLAUDE_PLUGIN_ROOT}/mcp-server/dist/bundle.js"],
+          "env": {
+            "NODE_ENV": "production"
+          }
+        }
+      }
+    }
+  ]
+}
