@@ -1,0 +1,47 @@
+{
+  "mcpb_version": "0.1",
+  "name": "teacher-assistant",
+  "display_name": "Учитель — Ассистент преподавателя",
+  "version": "1.0.0",
+  "description": "AI-ассистент для преподавателей школы (5-11 классы). ФГОС, планы уроков, задания, проверка работ, КТП.",
+  "long_description": "Плагин для Claude Desktop — помощник преподавателя средней и старшей школы. Создаёт планы уроков, задания, проверяет работы учеников, формирует календарно-тематическое планирование, анализирует успеваемость. Поддерживает 4 предмета (Русский язык, Математика, Физика, Литература) для 5-11 классов. Все материалы соответствуют ФГОС ООО и ФГОС СОО.",
+  "author": {
+    "name": "knottasoft",
+    "url": "https://github.com/knottasoft"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/knottasoft/teacher-assistant",
+  "server": {
+    "type": "node",
+    "entry_point": "mcp-server/dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["mcp-server/dist/index.js"],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "fgos_lookup",
+      "description": "Поиск требований ФГОС по предмету, классу и теме"
+    },
+    {
+      "name": "export_docx",
+      "description": "Конвертация Markdown в DOCX для печати"
+    },
+    {
+      "name": "import_template",
+      "description": "Импорт пользовательского шаблона документа"
+    },
+    {
+      "name": "hours_calculator",
+      "description": "Расчёт учебных часов за период"
+    },
+    {
+      "name": "grade_analytics",
+      "description": "Статистический анализ оценок класса"
+    }
+  ]
+}

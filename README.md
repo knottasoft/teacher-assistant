@@ -12,9 +12,16 @@
 
 ---
 
-## Быстрый старт
+## Установка
 
-### Вариант 1: Клонировать и запустить
+### Claude Code — плагин (рекомендуется)
+
+```bash
+# Установить как плагин Claude Code
+claude plugin install https://github.com/knottasoft/teacher-assistant.git
+```
+
+Или клонировать вручную и открыть папку в Claude Code:
 
 ```bash
 git clone https://github.com/knottasoft/teacher-assistant.git
@@ -22,23 +29,35 @@ cd teacher-assistant
 bash setup.sh
 ```
 
-Откройте папку `teacher-assistant` в Claude Code — плагин подключится автоматически.
-
-### Вариант 2: Подключить MCP-сервер глобально
+### Claude Code — только MCP-сервер
 
 ```bash
-# Через npx (после публикации на npm)
+# Через npx
 claude mcp add teacher -- npx @knottasoft/teacher-assistant-mcp
 
 # Или из локальной сборки
 claude mcp add teacher -- node /path/to/teacher-assistant/mcp-server/dist/index.js
 ```
 
-### Вариант 3: npm install
+### Claude Desktop — MCPB (one-click)
+
+Скачайте `.mcpb`-файл из [Releases](https://github.com/knottasoft/teacher-assistant/releases) и откройте в Claude Desktop.
+
+### npm
 
 ```bash
 npm install @knottasoft/teacher-assistant
 ```
+
+### Каналы дистрибуции
+
+| Канал | Формат | Аудитория |
+|-------|--------|-----------|
+| Claude Code Plugin | `.claude-plugin/plugin.json` | Разработчики с Claude Code |
+| MCP Registry | `server.json` | Любые MCP-клиенты |
+| MCPB Bundle | `manifest.json` → `.mcpb` | Claude Desktop |
+| npm | `@knottasoft/teacher-assistant-mcp` | Node.js / npx |
+| Git | `git clone` + `setup.sh` | Ручная установка |
 
 ---
 
@@ -151,10 +170,14 @@ npm install @knottasoft/teacher-assistant
 ```
 teacher-assistant/
 ├── package.json                    # npm-пакет (корневой)
-├── plugin.json                     # Метаданные для маркетплейса
+├── plugin.json                     # Метаданные плагина
+├── server.json                     # Official MCP Registry
+├── manifest.json                   # MCPB (Claude Desktop)
 ├── CLAUDE.md                       # Инструкции для Claude
 ├── setup.sh                        # Скрипт установки
 ├── .mcp.json                       # Конфигурация MCP-сервера
+├── .claude-plugin/
+│   └── plugin.json                 # Claude Code Plugin manifest
 ├── .claude/
 │   ├── settings.json               # Настройки и права
 │   └── rules/                      # Педагогические правила

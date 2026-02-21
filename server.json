@@ -1,0 +1,14 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name": "io.github.knottasoft/teacher-assistant",
+  "description": "AI teaching assistant for Russian schools (grades 5-11). FGOS curriculum lookup, DOCX export, grade analytics, academic hours calculator. Supports Russian, Math, Physics, Literature.",
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registry_type": "npm",
+      "identifier": "@knottasoft/teacher-assistant-mcp",
+      "version": "1.0.0",
+      "transport": "stdio"
+    }
+  ]
+}
