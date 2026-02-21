@@ -1,72 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-
-import russianData from "../data/fgos/russian.json" with { type: "json" };
-import mathData from "../data/fgos/math.json" with { type: "json" };
-import physicsData from "../data/fgos/physics.json" with { type: "json" };
-import literatureData from "../data/fgos/literature.json" with { type: "json" };
-
-interface Topic {
-  name: string;
-  hours: number;
-  planned_results: {
-    subject: string[];
-    meta: string[];
-    personal: string[];
-  };
-  uud: {
-    cognitive: string[];
-    regulative: string[];
-    communicative: string[];
-    personal: string[];
-  };
-  control_types: string[];
-  [key: string]: unknown;
-}
-
-interface Section {
-  name: string;
-  hours: number;
-  topics: Topic[];
-}
-
-interface GradeData {
-  level: string;
-  hours_per_week: number;
-  total_hours_per_year: number;
-  sections: Section[];
-  control_works: Record<string, unknown>;
-  [key: string]: unknown;
-}
-
-interface FgosData {
-  subject: string;
-  subject_id: string;
-  grades: Record<string, GradeData>;
-  [key: string]: unknown;
-}
-
-const FGOS_DATA: Record<string, FgosData> = {
-  russian: russianData as unknown as FgosData,
-  math: mathData as unknown as FgosData,
-  physics: physicsData as unknown as FgosData,
-  literature: literatureData as unknown as FgosData,
-};
-
-const SUBJECT_ALIASES: Record<string, string> = {
-  "русский": "russian",
-  "русский язык": "russian",
-  "математика": "math",
-  "алгебра": "math",
-  "геометрия": "math",
-  "физика": "physics",
-  "литература": "literature",
-};
-
-function resolveSubject(input: string): string {
-  const lower = input.toLowerCase().trim();
-  return SUBJECT_ALIASES[lower] || lower;
-}
+import { FGOS_DATA, resolveSubject } from "../data/shared.js";
+import type { FgosData } from "../data/shared.js";
 
 function loadFgosData(subjectId: string): FgosData | null {
   return FGOS_DATA[subjectId] || null;

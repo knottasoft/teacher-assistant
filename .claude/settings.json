@@ -13,7 +13,7 @@
       "mcp__teacher__hours_calculator",
       "mcp__teacher__grade_analytics",
       "Bash(pandoc *)",
-      "Bash(node *)"
+      "Bash(node mcp-server/*)"
     ],
     "deny": [
       "Bash(rm -rf *)",

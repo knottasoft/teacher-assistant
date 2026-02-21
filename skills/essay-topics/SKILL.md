@@ -31,4 +31,4 @@ user-invocable: true
 
 5. Сохрани: `темы_сочинений_[класс]_[произведение].md`
 
-Направления итогового сочинения: @ege-essay-directions.md
+Направления итогового сочинения: [ege-essay-directions.md](ege-essay-directions.md)

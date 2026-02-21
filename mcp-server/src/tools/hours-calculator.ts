@@ -1,27 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-
-import russianData from "../data/fgos/russian.json" with { type: "json" };
-import mathData from "../data/fgos/math.json" with { type: "json" };
-import physicsData from "../data/fgos/physics.json" with { type: "json" };
-import literatureData from "../data/fgos/literature.json" with { type: "json" };
-
-const FGOS_DATA: Record<string, { grades?: Record<string, { hours_per_week?: number }> }> = {
-  russian: russianData,
-  math: mathData,
-  physics: physicsData,
-  literature: literatureData,
-};
-
-const SUBJECT_ALIASES: Record<string, string> = {
-  "русский": "russian",
-  "русский язык": "russian",
-  "математика": "math",
-  "алгебра": "math",
-  "геометрия": "math",
-  "физика": "physics",
-  "литература": "literature",
-};
+import { FGOS_DATA, resolveSubject } from "../data/shared.js";
 
 // Academic calendar constants (Russia)
 const WEEKS_PER_QUARTER: Record<string, number[]> = {
@@ -33,11 +12,6 @@ const WEEKS_PER_SEMESTER: Record<string, number[]> = {
   // [S1, S2]
   default: [16, 18],
 };
-
-function resolveSubject(input: string): string {
-  const lower = input.toLowerCase().trim();
-  return SUBJECT_ALIASES[lower] || lower;
-}
 
 export function registerHoursCalculatorTool(server: McpServer): void {
   server.tool(

@@ -34,5 +34,5 @@ user-invocable: true
    - `задание_[тема]_вариант2.md` (для тестов/контрольных)
    - `ключ_[тема].md`
 
-Шаблоны: @templates/
-Критерии ОГЭ/ЕГЭ: @rubrics/oge-ege-criteria.md
+Шаблоны: [templates/](templates/)
+Критерии ОГЭ/ЕГЭ: [rubrics/oge-ege-criteria.md](rubrics/oge-ege-criteria.md)

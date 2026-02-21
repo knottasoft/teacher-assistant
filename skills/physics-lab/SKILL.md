@@ -50,4 +50,4 @@ user-invocable: true
 
 9. **Вывод** — шаблон для ученика
 
-Шаблоны: @lab-templates.md
+Шаблоны: [lab-templates.md](lab-templates.md)

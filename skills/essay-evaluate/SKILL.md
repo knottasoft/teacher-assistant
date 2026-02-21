@@ -18,7 +18,7 @@ user-invocable: true
    - **Итоговое сочинение** — зачёт/незачёт (5 критериев)
    - **Сочинение ЕГЭ** — задание 27 (по критериям К1-К12)
 
-2. Примени соответствующие критерии (см. @oge-ege-essay-criteria.md)
+2. Примени соответствующие критерии (см. [oge-ege-essay-criteria.md](oge-ege-essay-criteria.md))
 
 3. Для каждого критерия:
    - Выстави балл с обоснованием
@@ -37,4 +37,4 @@ user-invocable: true
 
 7. Сохрани результат: `оценка_сочинения_[имя].md`
 
-Критерии: @oge-ege-essay-criteria.md
+Критерии: [oge-ege-essay-criteria.md](oge-ege-essay-criteria.md)
