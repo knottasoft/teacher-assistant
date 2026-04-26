@@ -1,6 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { FGOS_DATA, resolveSubject } from "../data/shared.js";
+import { getGradeData, resolveSubject } from "../data/shared.js";
 
 // Academic calendar constants (Russia)
 const WEEKS_PER_QUARTER: Record<string, number[]> = {
@@ -30,12 +30,9 @@ export function registerHoursCalculatorTool(server: McpServer): void {
       let standardHoursPerWeek = hours_per_week;
 
       if (!standardHoursPerWeek) {
-        const data = FGOS_DATA[subjectId];
-        if (data) {
-          const gradeData = data.grades?.[String(grade)];
-          if (gradeData) {
-            standardHoursPerWeek = gradeData.hours_per_week;
-          }
+        const gradeData = getGradeData(subjectId, grade);
+        if (gradeData) {
+          standardHoursPerWeek = gradeData.hours_per_week;
         }
       }
 

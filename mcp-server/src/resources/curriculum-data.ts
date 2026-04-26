@@ -1,5 +1,5 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { SUBJECTS, SUBJECT_NAMES, FGOS_DATA } from "../data/shared.js";
+import { SUBJECTS, SUBJECT_NAMES, getFgosData } from "../data/shared.js";
 
 export function registerCurriculumResources(server: McpServer): void {
   for (const subject of SUBJECTS) {
@@ -7,7 +7,7 @@ export function registerCurriculumResources(server: McpServer): void {
     const name = `Программа: ${SUBJECT_NAMES[subject]}`;
 
     server.resource(uri, name, async () => {
-      const data = FGOS_DATA[subject];
+      const data = getFgosData(subject);
 
       if (!data?.grades) {
         return {

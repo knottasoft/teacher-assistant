@@ -1,7 +1,7 @@
 {
   "name": "@knottasoft/teacher-assistant",
-  "version": "1.0.0",
-  "description": "Claude Code plugin — AI teaching assistant for Russian schools (grades 5-11). Lesson plans, assignments, grading, FGOS compliance.",
+  "version": "1.1.0",
+  "description": "Claude Code plugin — AI teaching assistant for Russian schools (grades 5-11). Lesson plans, assignments, grading, FGOS/FRP compliance, semantic curriculum search (FTS5 + multilingual-e5-base).",
   "keywords": [
     "claude-code",
     "claude-code-plugin",
@@ -36,11 +36,14 @@
   "files": [
     "mcp-server/dist/",
     "mcp-server/src/data/",
+    "mcp-server/src/db/",
+    "mcp-server/data/",
     "mcp-server/package.json",
     "skills/",
-    ".claude/",
     ".claude-plugin/",
     "hooks/",
+    "scripts/build-fgos-db.mjs",
+    "scripts/validate-fgos.mjs",
     "CLAUDE.md",
     "plugin.json",
     "server.json",
@@ -51,7 +54,9 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "build": "npm run build --prefix mcp-server",
+    "build:db": "node scripts/build-fgos-db.mjs",
+    "build:db:no-vec": "node scripts/build-fgos-db.mjs --no-vec",
+    "build": "npm run build:db && npm run build --prefix mcp-server",
     "test": "npm test --prefix mcp-server",
     "lint": "npm run lint --prefix mcp-server",
     "typecheck": "npm run typecheck --prefix mcp-server",
@@ -61,5 +66,10 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@xenova/transformers": "^2.17.2",
+    "better-sqlite3": "^12.9.0",
+    "sqlite-vec": "^0.1.9"
   }
 }

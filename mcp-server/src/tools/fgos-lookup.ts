@@ -1,11 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { FGOS_DATA, resolveSubject } from "../data/shared.js";
-import type { FgosData } from "../data/shared.js";
-
-function loadFgosData(subjectId: string): FgosData | null {
-  return FGOS_DATA[subjectId] || null;
-}
+import { getFgosData, resolveSubject } from "../data/shared.js";
 
 export function registerFgosLookupTool(server: McpServer): void {
   server.tool(
@@ -19,7 +14,7 @@ export function registerFgosLookupTool(server: McpServer): void {
     },
     async ({ subject, grade, topic, section }) => {
       const subjectId = resolveSubject(subject);
-      const data = loadFgosData(subjectId);
+      const data = getFgosData(subjectId);
 
       if (!data) {
         return {

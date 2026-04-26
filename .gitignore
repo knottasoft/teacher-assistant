@@ -1,16 +1,21 @@
+# Keep only the bundle in dist/, ignore intermediate build artifacts
+*.docx
+*.docx.tmp
+*.log
+*.tsbuildinfo
+.DS_Store
+.env
+coverage/
+mcp-server/.cache/
+mcp-server/data/fgos.db-shm
+mcp-server/data/fgos.db-wal
+mcp-server/dist/*.d.ts
+mcp-server/dist/*.js.map
+mcp-server/dist/bundle.tmp.js
+mcp-server/dist/data/*
+!mcp-server/dist/data/fgos.db
+mcp-server/dist/resources/
+mcp-server/dist/tools/
+mcp-server/node_modules/
 node_modules/
 user-data/
-.env
-*.docx.tmp
-*.docx
-.DS_Store
-*.log
-coverage/
-
-# Keep only the bundle in dist/, ignore intermediate build artifacts
-mcp-server/dist/*.js.map
-mcp-server/dist/*.d.ts
-mcp-server/dist/tools/
-mcp-server/dist/resources/
-mcp-server/dist/data/
-mcp-server/dist/bundle.tmp.js
