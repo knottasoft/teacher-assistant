@@ -3,7 +3,7 @@
     "teacher": {
       "type": "stdio",
       "command": "node",
-      "args": ["mcp-server/dist/bundle.js"],
+      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp-server/dist/bundle.js"],
       "env": {
         "NODE_ENV": "production"
       }

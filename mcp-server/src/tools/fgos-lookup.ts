@@ -67,8 +67,29 @@ export function registerFgosLookupTool(server: McpServer): void {
       }
 
       if (sections.length === 0) {
-        // Return full grade data if no matches
-        sections = gradeData.sections;
+        // No matches: return a discovery hint instead of dumping the whole grade,
+        // which would otherwise blow up the context window.
+        const availableSections = gradeData.sections.map((s) => s.name);
+        const availableTopics = gradeData.sections.flatMap((s) =>
+          s.topics.map((t) => `${s.name} → ${t.name}`)
+        );
+        const hint = {
+          subject: data.subject,
+          grade,
+          message:
+            "Совпадений не найдено. Уточни параметры section/topic из перечня ниже, либо вызови без них для полного списка.",
+          query: { topic: topic ?? null, section: section ?? null },
+          available_sections: availableSections,
+          available_topics: availableTopics,
+        };
+        return {
+          content: [
+            {
+              type: "text" as const,
+              text: JSON.stringify(hint, null, 2),
+            },
+          ],
+        };
       }
 
       const result = {

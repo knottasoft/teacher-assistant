@@ -2,9 +2,10 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { readFile, writeFile, mkdir } from "fs/promises";
 import { existsSync } from "fs";
-import { join, basename, extname } from "path";
+import { join, basename, extname, resolve, isAbsolute } from "path";
 
 const USER_TEMPLATES_DIR = join(process.cwd(), "user-data", "templates");
+const ALLOWED_EXTENSIONS = new Set([".md", ".markdown", ".txt"]);
 
 interface TemplateMetadata {
   name: string;
@@ -47,7 +48,24 @@ export function registerImportTemplateTool(server: McpServer): void {
         .describe("Тип документа: lesson-plan, test, thematic-plan, report, assignment, lab-work"),
     },
     async ({ template_path, doc_type }) => {
-      if (!existsSync(template_path)) {
+      // Resolve to absolute path and validate extension before any I/O
+      const sourcePath = isAbsolute(template_path)
+        ? template_path
+        : resolve(process.cwd(), template_path);
+      const ext = extname(sourcePath).toLowerCase();
+
+      if (!ALLOWED_EXTENSIONS.has(ext)) {
+        return {
+          content: [
+            {
+              type: "text" as const,
+              text: `Ошибка: недопустимое расширение "${ext}". Разрешены: ${[...ALLOWED_EXTENSIONS].join(", ")}.`,
+            },
+          ],
+        };
+      }
+
+      if (!existsSync(sourcePath)) {
         return {
           content: [
             {
@@ -61,11 +79,21 @@ export function registerImportTemplateTool(server: McpServer): void {
       // Ensure templates directory exists
       await mkdir(USER_TEMPLATES_DIR, { recursive: true });
 
-      const content = await readFile(template_path, "utf-8");
-      const ext = extname(template_path);
-      const originalName = basename(template_path);
+      const content = await readFile(sourcePath, "utf-8");
+      const originalName = basename(sourcePath);
       const targetName = `${doc_type}${ext}`;
-      const targetPath = join(USER_TEMPLATES_DIR, targetName);
+      // Defence-in-depth: ensure target stays inside USER_TEMPLATES_DIR
+      const targetPath = resolve(USER_TEMPLATES_DIR, targetName);
+      if (!targetPath.startsWith(resolve(USER_TEMPLATES_DIR) + "/") && targetPath !== resolve(USER_TEMPLATES_DIR, targetName)) {
+        return {
+          content: [
+            {
+              type: "text" as const,
+              text: `Ошибка: некорректный целевой путь.`,
+            },
+          ],
+        };
+      }
 
       // Copy template
       await writeFile(targetPath, content, "utf-8");
