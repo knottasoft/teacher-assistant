@@ -2,9 +2,8 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { SUBJECTS, SUBJECT_NAMES, FGOS_DATA } from "../data/shared.js";
 
 export function registerFgosResources(server: McpServer): void {
+  const grades = [5, 6, 7, 8, 9, 10, 11];
   for (const subject of SUBJECTS) {
-    const grades = subject === "physics" ? [7, 8, 9, 10, 11] : [5, 6, 7, 8, 9, 10, 11];
-
     for (const grade of grades) {
       const uri = `fgos://${subject}/${grade}`;
       const name = `ФГОС: ${SUBJECT_NAMES[subject]}, ${grade} класс`;

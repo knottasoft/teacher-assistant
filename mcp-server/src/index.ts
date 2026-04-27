@@ -17,11 +17,11 @@ import { registerCurriculumResources } from "./resources/curriculum-data.js";
 // metadata on top of name+version.
 const server = new McpServer({
   name: "teacher",
-  title: "Учитель — ассистент преподавателя",
+  title: "Учитель литературы — ассистент преподавателя",
   description:
-    "AI-помощник учителя средней и старшей школы (5–11 классы): поиск формулировок ФГОС/ФОП/ФРП, аналитика оценок, расчёт учебных часов, импорт школьных шаблонов.",
+    "AI-помощник учителя литературы средней и старшей школы (5–11 классы): поиск формулировок ФГОС/ФОП/ФРП по литературе, аналитика оценок, расчёт учебных часов, импорт школьных шаблонов.",
   websiteUrl: "https://github.com/knottasoft/teacher-assistant",
-  version: "1.0.5",
+  version: "1.1.0",
 });
 
 // Register tools
