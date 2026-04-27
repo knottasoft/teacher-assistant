@@ -2,7 +2,7 @@
 name: thematic-plan
 description: Use when teacher needs a calendar-thematic plan (КТП, тематическое планирование, тематический план) for a subject and period — produces a таблицу с распределением часов, темами уроков, видами контроля, привязкой к ФГОС/ФОП с расчётом учебных недель. Triggers: «КТП», «тематическое планирование», «календарно-тематическое планирование», «план на четверть», «план на год», «распределение часов».
 argument-hint: "[предмет] [класс] [период: четверть|полугодие|год]"
-allowed-tools: Read, Write, mcp__teacher__fgos_lookup, mcp__teacher__hours_calculator, mcp__teacher__export_docx
+allowed-tools: Read, Write, mcp__plugin_teacher-assistant_teacher__fgos_lookup, mcp__plugin_teacher-assistant_teacher__hours_calculator, mcp__plugin_teacher-assistant_teacher__export_docx
 ---
 
 # Календарно-тематическое планирование

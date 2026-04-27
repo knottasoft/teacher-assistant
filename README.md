@@ -61,6 +61,32 @@ npm install @knottasoft/teacher-assistant
 
 ---
 
+## Разрешения и доверие
+
+Плагин содержит локальный MCP-сервер `teacher` с пятью инструментами. При установке через Claude Code / Cowork их каноничные имена (по схеме `mcp__plugin_<plugin>_<server>__<tool>`):
+
+- `mcp__plugin_teacher-assistant_teacher__fgos_lookup` — поиск формулировок ФГОС/ФОП/ФРП
+- `mcp__plugin_teacher-assistant_teacher__grade_analytics` — анализ оценок (CSV/XLSX, в т.ч. cp1251)
+- `mcp__plugin_teacher-assistant_teacher__hours_calculator` — расчёт учебных часов
+- `mcp__plugin_teacher-assistant_teacher__export_docx` — экспорт markdown в DOCX
+- `mcp__plugin_teacher-assistant_teacher__import_template` — импорт пользовательских шаблонов
+
+Чтобы инструменты работали без диалогов разрешений (особенно в Claude Cowork, где штатный permission-флоу для plugin-MCP нестабилен), плагин включает **PreToolUse-хук** `hooks/auto-approve-teacher-mcp.mjs`. Хук авто-апрувит **только** вызовы своих собственных пяти инструментов и ничего больше.
+
+**Что плагин НЕ делает автоматически:**
+
+- Не авто-апрувит Bash, Edit, Write, Read и любые другие встроенные инструменты Claude Code.
+- Не авто-апрувит инструменты других MCP-серверов или других плагинов.
+- Не авто-апрувит инструменты этого же сервера, установленного **не как плагин** (например, через `claude mcp add teacher -- ...` — там имена короткие, `mcp__teacher__*`, и пользователь сам управляет permissions через CLI).
+- Не пишет на диск вне `user-data/` (path-whitelist обеспечивается отдельным хуком `check-teaching-doc.mjs`).
+- Не выходит в сеть из MCP-сервера.
+
+Установив плагин, вы соглашаетесь именно с этим поведением. Чтобы откатить — отключите плагин через `/plugin disable` или удалите запись `PreToolUse` из `hooks/hooks.json`.
+
+> **Для контрибьюторов:** `permissions.allow` в плагин-bundled `.claude/settings.json` **не путешествует** с плагином к установившим — это особенность Claude Code (project-scope settings применяются только при работе из этого репо как из проекта). Только запись плагина в `~/.claude/settings.json` пользователя, managed-settings, или хук-уровень auto-approve реально работают для дистрибуции. Не пытайтесь «починить» permission через `.claude/settings.json` плагина.
+
+---
+
 ## Команды (18 навыков)
 
 ### Основные
