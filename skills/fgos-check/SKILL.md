@@ -1,9 +1,8 @@
 ---
 name: fgos-check
-description: Проверить документ (план урока, программу, КТП) на соответствие ФГОС. Выдаёт отчёт с замечаниями и рекомендациями.
+description: Use when teacher needs to verify that a document (lesson plan, программа, КТП, рабочая программа) complies with current ФГОС/ФОП/ФРП — produces a checklist-style report with issues, missing fields, and concrete recommendations referencing actual нормативные документы (ФГОС ООО №287/2021, ФГОС СОО №413/2012 в действующей редакции, ФОП №370/371 от 2023). Triggers: «проверь на ФГОС», «соответствие ФГОС», «соответствие ФОП», «аудит программы», «проверка КТП», «привести к ФГОС».
 argument-hint: "[путь к файлу]"
 allowed-tools: Read, mcp__teacher__fgos_lookup
-user-invocable: true
 ---
 
 # Проверка соответствия ФГОС
