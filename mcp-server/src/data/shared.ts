@@ -1,6 +1,3 @@
-import russianData from "./fgos/russian.json" with { type: "json" };
-import mathData from "./fgos/math.json" with { type: "json" };
-import physicsData from "./fgos/physics.json" with { type: "json" };
 import literatureData from "./fgos/literature.json" with { type: "json" };
 
 export interface Topic {
@@ -43,29 +40,17 @@ export interface FgosData {
   [key: string]: unknown;
 }
 
-export const SUBJECTS = ["russian", "math", "physics", "literature"] as const;
+export const SUBJECTS = ["literature"] as const;
 
 export const SUBJECT_NAMES: Record<string, string> = {
-  russian: "Русский язык",
-  math: "Математика",
-  physics: "Физика",
   literature: "Литература",
 };
 
 export const SUBJECT_ALIASES: Record<string, string> = {
-  "русский": "russian",
-  "русский язык": "russian",
-  "математика": "math",
-  "алгебра": "math",
-  "геометрия": "math",
-  "физика": "physics",
   "литература": "literature",
 };
 
 export const FGOS_DATA: Record<string, FgosData> = {
-  russian: russianData as unknown as FgosData,
-  math: mathData as unknown as FgosData,
-  physics: physicsData as unknown as FgosData,
   literature: literatureData as unknown as FgosData,
 };
 

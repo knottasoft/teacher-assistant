@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(__dirname, "..", "data", "fgos");
 
-const SUBJECTS = ["russian", "math", "physics", "literature"];
+const SUBJECTS = ["literature"];
 
 describe("FGOS data", () => {
   const datasets: Record<string, unknown> = {};
@@ -160,12 +160,6 @@ describe("FGOS data", () => {
 
 describe("FGOS subject aliases", () => {
   const SUBJECT_ALIASES: Record<string, string> = {
-    русский: "russian",
-    "русский язык": "russian",
-    математика: "math",
-    алгебра: "math",
-    геометрия: "math",
-    физика: "physics",
     литература: "literature",
   };
 

@@ -12,7 +12,7 @@ export function registerFgosLookupTool(server: McpServer): void {
     "fgos_lookup",
     "Поиск требований ФГОС по предмету, классу и теме. Возвращает разделы программы, планируемые результаты, УУД и виды контроля.",
     {
-      subject: z.string().describe("Предмет (русский, математика, физика, литература)"),
+      subject: z.string().describe("Предмет (литература)"),
       grade: z.number().min(5).max(11).describe("Класс (5-11)"),
       topic: z.string().optional().describe("Тема для поиска (необязательно)"),
       section: z.string().optional().describe("Раздел программы (необязательно)"),
@@ -26,7 +26,7 @@ export function registerFgosLookupTool(server: McpServer): void {
           content: [
             {
               type: "text" as const,
-              text: `Ошибка: предмет "${subject}" не найден. Доступные предметы: русский, математика, физика, литература.`,
+              text: `Ошибка: предмет "${subject}" не поддерживается. В этой версии плагина доступна только литература.`,
             },
           ],
         };
