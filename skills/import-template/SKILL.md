@@ -1,6 +1,6 @@
 ---
 name: import-template
-description: Use ONLY when the user EXPLICITLY asks to import a custom document template (шаблон плана урока, шаблон отчёта, шаблон КТП) — to be used by other skills as the preferred output format for that document type. Side-effect skill: do NOT auto-invoke as part of natural-language requests; do NOT activate as a sub-deliverable in compound prompts. Activate ONLY on explicit triggers like «импортируй шаблон», «загрузи шаблон», «использовать шаблон школы», «принять шаблон», «import template», «save this as my template». For everything else stay silent.
+description: Imports a custom document template (план урока, отчёт, КТП, тест) so other skills use it as the preferred output format for that document type. User-invocable only via /import-template.
 argument-hint: "[путь к шаблону] [тип: план|тест|ктп|отчёт]"
 allowed-tools: Read, Write, mcp__plugin_teacher-assistant_teacher__import_template
 disable-model-invocation: true

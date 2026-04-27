@@ -1,6 +1,6 @@
 ---
 name: literature-questions
-description: Use whenever comprehension questions for analysis of a literature work are being produced — INCLUDING as a sub-deliverable («вопросы к разбору на уроке», «материалы к открытому уроку», «пакет вопросов»). Activate on ANY mention of «вопросы к произведению», «вопросы для анализа», «вопросы по литературе», «разбор произведения», «вопросы для обсуждения», «дискуссионные вопросы», «вопросы для зачёта». INVOKE via the Skill tool — do not invent questions inline; call the skill, use its output. Output: questions of varied difficulty (базовые, проблемные, сравнительные, для дискуссии), covering сюжет, образы героев, авторская позиция, художественные средства.
+description: Use when a teacher needs comprehension questions for analysis of a literature work. Outputs questions of varied difficulty (базовые, проблемные, сравнительные, для дискуссии) covering сюжет, образы героев, авторскую позицию, художественные средства.
 argument-hint: "[класс] [автор] [произведение]"
 allowed-tools: Read, Write
 ---

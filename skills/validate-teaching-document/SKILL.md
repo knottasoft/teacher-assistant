@@ -1,6 +1,6 @@
 ---
 name: validate-teaching-document
-description: Use when about to claim a teaching document is finished or ready, before saving the final file or notifying the teacher — verifies that the document contains class, subject, ФГОС/ФОП reference, planned results/УУД, and document type in heading. Triggers automatically when other skills (lesson-plan, assignment, dictation, grade-report, thematic-plan, etc.) finish producing их вывод. Pushy: don't ship undertyped teaching docs.
+description: Use before saving a teaching document to disk or claiming it is finished — verifies that the document contains class, subject, ФГОС/ФОП reference, planned results/УУД, and document type in heading.
 ---
 
 # Self-validation перед завершением учебного документа

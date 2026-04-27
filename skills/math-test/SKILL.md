@@ -1,6 +1,6 @@
 ---
 name: math-test
-description: Use whenever a full math test (контрольная или зачёт) with several variants is being produced — INCLUDING as a sub-deliverable («материалы к контрольной», «пакет вариантов теста», «два варианта итоговой»). Activate on ANY mention of «контрольная по математике», «вариант теста», «зачёт по математике», «работа по математике в нескольких вариантах», «итоговый тест по математике». INVOKE via the Skill tool — do not assemble a test inline; call the skill, use its output. Output: test с инструкцией, заданиями (часть А — короткий ответ, часть В — развёрнутый), шкалой оценивания, ключом ответов в отдельном файле.
+description: Use when assembling a math контрольная or зачёт with several variants. Produces a test with инструкцией, заданиями (часть А — короткий ответ, часть В — развёрнутый), шкалой оценивания, и ключом ответов в отдельном файле.
 argument-hint: "[класс] [тема] [количество вариантов]"
 allowed-tools: Read, Write
 ---

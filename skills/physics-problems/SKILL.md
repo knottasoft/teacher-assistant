@@ -1,6 +1,6 @@
 ---
 name: physics-problems
-description: Use whenever physics problems for a class and theme are being generated — INCLUDING as a sub-deliverable («задачи к уроку», «материалы к контрольной по физике», «пакет задач к занятию»). Activate on ANY mention of «задачи по физике», «задачи на тему», «расчётные задачи», «качественные задачи», «составь задачи по физике», «карточки задач по физике», «задачи к ОГЭ/ЕГЭ по физике». INVOKE this skill via the Skill tool — do not invent physics problems inline; call the skill, use its output. Output: качественные и расчётные задачи with детальными решениями (Дано → Найти → Решение → Ответ + проверка размерности), suitable for ДЗ, классной, контрольной, ОГЭ/ЕГЭ.
+description: Use when generating physics problems for a class and theme. Produces качественные и расчётные задачи with детальными решениями (Дано → Найти → Решение → Ответ + проверка размерности), suitable for ДЗ, классной, контрольной, ОГЭ/ЕГЭ.
 argument-hint: "[класс] [тема] [количество]"
 allowed-tools: Read, Write
 ---

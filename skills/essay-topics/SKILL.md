@@ -1,6 +1,6 @@
 ---
 name: essay-topics
-description: Use whenever essay topics on a literature work or итоговое-сочинение directions are being produced — INCLUDING as a sub-deliverable («темы для подготовки к зачёту», «материалы к итоговому сочинению», «направления + темы», «пакет тем к разбору произведения»). Activate on ANY mention of «темы сочинений», «придумай темы для сочинения», «темы итогового сочинения», «темы по литературе», «направления сочинений», «список тем к произведению», «варианты тем к экзамену». INVOKE this skill via the Skill tool — do not invent topics inline; call the skill, use its output. Output: list of topics with assessment criteria, recommendations, and ОГЭ/ЕГЭ-aligned wording.
+description: Use when a teacher needs essay topics for a literature work or направления итогового сочинения. Outputs a list of topics with assessment criteria, recommendations, and ОГЭ/ЕГЭ-aligned wording.
 argument-hint: "[класс] [произведение или направление]"
 allowed-tools: Read, Write
 ---
