@@ -1,9 +1,8 @@
 ---
 name: lesson-plan
-description: Создать план урока по ФГОС. Генерирует полный план урока с целями, планируемыми результатами, ходом урока и домашним заданием.
+description: Use when teacher needs to prepare a lesson plan, lesson outline, lesson notes, methodical materials, or teaching notes for a school subject (русский язык, математика, физика, литература, 5-11 класс) — produces a ФГОС/ФОП-aligned plan with objectives, planned results (предметные/метапредметные/личностные), УУД, ход урока по этапам системно-деятельностного подхода, differentiated tasks and homework. Triggers: «план урока», «конспект урока», «методичка к уроку», «подготовить урок», «материалы к уроку», «план занятия», «разработка урока», «технологическая карта урока». Use even when user only mentions one of these triggers in a multi-part request.
 argument-hint: "[предмет] [класс] [тема]"
 allowed-tools: Read, Write, mcp__teacher__fgos_lookup, mcp__teacher__export_docx
-user-invocable: true
 ---
 
 # Создание плана урока
@@ -32,15 +31,3 @@ user-invocable: true
 Примеры планов: [examples/](examples/)
 Шаблон ФГОС: [templates/fgos-template.md](templates/fgos-template.md)
 Шаблон открытого урока: [templates/open-lesson.md](templates/open-lesson.md)
-
-## Self-validation перед завершением
-
-Перед тем как сообщить пользователю «готово», проверь, что выходной файл содержит:
-
-- [x] **Класс** (например, «5 класс», «8 класс»)
-- [x] **Предмет** (русский язык, математика, физика, литература)
-- [x] **Привязка к нормативной базе:** ФГОС (приказ Минпросвещения №287/2021 для ООО, приказ №413/2012 в действующей редакции для СОО), ФОП (№370 или №371 от 2023), либо ФРП от 2024
-- [x] **Планируемые результаты** или **УУД** (для планов уроков, заданий, КТП)
-- [x] **Тип документа** в заголовке (план урока / задание / тест / отчёт / КТП)
-
-Если чего-то не хватает — допиши до возврата управления, не возвращай учителю недооформленный документ. Это правило заменяет общий PostToolUse-hook в плагине и относится только к выходу этого skill'а.

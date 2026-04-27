@@ -1,9 +1,8 @@
 ---
 name: grade-report
-description: Проанализировать оценки и создать отчёт об успеваемости класса. Принимает реальный экспорт МЭШ/Дневник.ру/Сетевого Города/ЭлЖур (XLSX или CSV) либо упрощённые форматы.
+description: Use when teacher needs to analyze student grades and produce a structured class performance report — accepts native exports from electronic journals (МЭШ, Дневник.ру, Сетевой Город, ЭлЖур: XLSX, CSV with header), simple CSV `ФИО,5,4,3,...`, or JSON. Computes class average, quality of knowledge (% on 4-5), success rate (% no 2), distribution, students_at_risk, top students; supports period and work-type filters; anonymizes ФИО in LLM prompt by default. Triggers: «отчёт по успеваемости», «аналитика журнала», «средний балл класса», «проанализируй оценки», «качество знаний», «группа риска», «отчёт за четверть».
 argument-hint: "[путь к XLSX/CSV/JSON, или 'ввести вручную']"
 allowed-tools: Read, Write, mcp__teacher__grade_analytics, mcp__teacher__export_docx
-user-invocable: true
 ---
 
 # Анализ успеваемости и отчёт

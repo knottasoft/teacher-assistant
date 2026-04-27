@@ -1,9 +1,8 @@
 ---
 name: import-template
-description: Импортировать пользовательский шаблон документа для использования при генерации учебных материалов.
+description: Use this skill ONLY when user explicitly asks to import a custom document template (шаблон плана урока, шаблон отчёта, шаблон КТП) — to be used by other skills as the preferred output format for that document type. Side-effect skill: don't auto-invoke.
 argument-hint: "[путь к шаблону] [тип: план|тест|ктп|отчёт]"
 allowed-tools: Read, Write, mcp__teacher__import_template
-user-invocable: true
 disable-model-invocation: true
 ---
 
