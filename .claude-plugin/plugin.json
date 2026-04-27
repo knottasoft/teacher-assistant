@@ -1,7 +1,7 @@
 {
   "name": "teacher-assistant",
   "description": "AI-ассистент для преподавателей средней и старшей школы (5-11 классы). Планы уроков, задания, проверка работ, КТП, аналитика оценок. Полное соответствие ФГОС.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": {
     "name": "knottasoft",
     "url": "https://github.com/knottasoft"

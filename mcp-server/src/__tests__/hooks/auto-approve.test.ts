@@ -43,8 +43,8 @@ describe("auto-approve-teacher-mcp hook", () => {
     expect(JSON.parse(stdout).hookSpecificOutput.permissionDecision).toBe("allow");
   });
 
-  it("approves export_docx", () => {
-    const input = JSON.stringify({ tool_name: `${PLUGIN_PREFIX}export_docx`, tool_input: {} });
+  it("approves hours_calculator", () => {
+    const input = JSON.stringify({ tool_name: `${PLUGIN_PREFIX}hours_calculator`, tool_input: {} });
     const { stdout, status } = runHook(input);
     expect(status).toBe(0);
     expect(JSON.parse(stdout).hookSpecificOutput.permissionDecision).toBe("allow");
