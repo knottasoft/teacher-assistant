@@ -13,5 +13,9 @@ mcp-server/dist/*.d.ts
 mcp-server/dist/tools/
 mcp-server/dist/resources/
 mcp-server/dist/data/
+mcp-server/dist/__tests__/
 mcp-server/dist/bundle.tmp.js
 *.mcpb
+
+# User-local artifacts not for distribution
+teacher-assistant-cowork.zip
