@@ -1,6 +1,6 @@
 ---
 name: check-work
-description: Use when teacher needs to check, evaluate, grade, or comment on a student's submitted work — accepts the work as text or a file path, returns a grade (5-балльная или критериальная) with structured constructive feedback (положительное → ошибки → рекомендации) in line with педагогический подход. Triggers: «проверь работу», «оцени работу», «выставить оценку», «прокомментировать работу», «проверить тетрадь», «проверка домашнего задания».
+description: Use whenever a student's submitted work is being checked, evaluated, graded, or commented on — INCLUDING as a sub-deliverable in compound reviews («разбор контрольной», «проверка серии работ», «отчёт по проверке»). Accepts work as text or file path. Activate on ANY mention of «проверь работу», «оцени работу», «выставить оценку», «прокомментировать работу», «проверить тетрадь», «проверка домашнего задания». INVOKE via the Skill tool — do not grade inline. Specialized siblings: essay-evaluate (сочинения), math-check (математика). Returns 5-балльная или критериальная оценка + structured feedback (положительное → ошибки → рекомендации) per педагогический подход.
 argument-hint: "[путь к файлу или текст работы]"
 allowed-tools: Read, Write
 ---

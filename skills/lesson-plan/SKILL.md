@@ -1,6 +1,6 @@
 ---
 name: lesson-plan
-description: Use when teacher needs to prepare a lesson plan, lesson outline, lesson notes, methodical materials, or teaching notes for a school subject (русский язык, математика, физика, литература, 5-11 класс) — produces a ФГОС/ФОП-aligned plan with objectives, planned results (предметные/метапредметные/личностные), УУД, ход урока по этапам системно-деятельностного подхода, differentiated tasks and homework. Triggers: «план урока», «конспект урока», «методичка к уроку», «подготовить урок», «материалы к уроку», «план занятия», «разработка урока», «технологическая карта урока». Use even when user only mentions one of these triggers in a multi-part request.
+description: Use whenever a lesson plan, конспект урока, or технологическая карта is being produced — INCLUDING as a sub-deliverable («пакет к педсовету», «методичка», «компенсирующий урок», «открытый урок»). Activate on ANY mention of «план урока», «конспект урока», «методичка», «технологическая карта», «компенсирующий урок», «коррекционный урок», «открытый урок», «итоговый урок», «обобщающий урок». INVOKE via the Skill tool — do not produce a plan inline even inside a package; call the skill, weave output. Subjects: русский, математика, физика, литература, 5-11. ФГОС/ФОП-aligned (УУД, предметные/метапредметные/личностные результаты, системно-деятельностный подход).
 argument-hint: "[предмет] [класс] [тема]"
 allowed-tools: Read, Write, Skill, mcp__plugin_teacher-assistant_teacher__fgos_lookup
 ---
