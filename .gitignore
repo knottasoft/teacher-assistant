@@ -14,3 +14,4 @@ mcp-server/dist/tools/
 mcp-server/dist/resources/
 mcp-server/dist/data/
 mcp-server/dist/bundle.tmp.js
+*.mcpb

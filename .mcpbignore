@@ -1,0 +1,45 @@
+# Git, IDE, OS
+.git/
+.github/
+.gitignore
+.DS_Store
+.vscode/
+.idea/
+
+# Markdown/docs/audit (не нужны runtime'у)
+docs/
+REVIEW.md
+CONTRIBUTING.md
+CHANGELOG.md
+
+# Test fixtures (large XLSX, not needed for runtime)
+mcp-server/test-fixtures/
+
+# Source code (in MCPB только bundle.js нужен)
+mcp-server/src/
+mcp-server/tsconfig.json
+mcp-server/vitest.config.ts
+mcp-server/esbuild.config.mjs
+mcp-server/package-lock.json
+
+# Build artifacts not needed at runtime
+mcp-server/dist/data/
+mcp-server/dist/index.js
+mcp-server/dist/index.d.ts
+mcp-server/dist/index.js.map
+mcp-server/dist/resources/
+mcp-server/dist/tools/
+
+# Dev-only files
+scripts/
+setup.sh
+.npmignore
+package-lock.json
+server.json
+
+# MCPB output itself (избегаем рекурсии)
+*.mcpb
+
+# Node modules (всё уже inлайнено в bundle.js — ESM bundle)
+node_modules/
+mcp-server/node_modules/
