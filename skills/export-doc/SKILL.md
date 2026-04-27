@@ -2,7 +2,7 @@
 name: export-doc
 description: Use this skill ONLY when user explicitly asks to export a Markdown teaching document to DOCX for printing or upload to school systems. Side-effect skill: don't auto-invoke as part of natural-language requests.
 argument-hint: "[путь к .md файлу]"
-allowed-tools: Read, mcp__teacher__export_docx
+allowed-tools: Read, mcp__plugin_teacher-assistant_teacher__export_docx
 disable-model-invocation: true
 ---
 

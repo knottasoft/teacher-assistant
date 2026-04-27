@@ -2,7 +2,7 @@
 name: assignment
 description: Use when teacher needs to create a class assignment, homework, classwork, control work, test, quiz, или handout-задания (раздаточный материал с заданиями), worksheet — produces задания с ключами ответов и шкалой оценивания, привязанные к теме урока и ФГОС. Triggers: «задание», «домашнее задание», «дз», «контрольная», «классная работа», «самостоятельная», «тест», «квиз», «раздатка», «раздаточный материал», «карточка с заданиями», «рабочий лист», «упражнение». Use this when user asks for any of these — even one term in a multi-part request like «сделай план + раздатку + квиз».
 argument-hint: "[предмет] [класс] [тема] [тип: тест|дз|контрольная|классная|раздатка|квиз]"
-allowed-tools: Read, Write, mcp__teacher__fgos_lookup
+allowed-tools: Read, Write, mcp__plugin_teacher-assistant_teacher__fgos_lookup
 ---
 
 # Создание задания
