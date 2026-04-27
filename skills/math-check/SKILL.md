@@ -1,6 +1,6 @@
 ---
 name: math-check
-description: Use when teacher needs to check a student's math problem solution — points out arithmetic and logical errors, evaluates the reasoning step-by-step, suggests the correct solution. Triggers: «проверь решение», «найди ошибку», «оцени решение задачи», «разбор ошибок».
+description: Use whenever a student's math problem solution is being checked — INCLUDING as a sub-deliverable («разбор контрольной у Вани», «проверка серии решений», «отчёт по ошибкам в работе», «материалы к разбору ошибок»). Activate on ANY mention of «проверь решение», «найди ошибку», «оцени решение задачи», «разбор ошибок», «комментарий к решению», «проверка математической работы». INVOKE this skill via the Skill tool — do not eyeball the solution inline; call the skill, use its output. Output: arithmetic and logical errors pointed out, step-by-step reasoning evaluation, correct solution, оценка по 5-балльной шкале.
 argument-hint: "[путь к файлу или текст решения]"
 allowed-tools: Read, Write
 ---

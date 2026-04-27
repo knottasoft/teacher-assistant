@@ -18,7 +18,7 @@ const server = new McpServer({
     title: "Учитель — ассистент преподавателя",
     description: "AI-помощник учителя средней и старшей школы (5–11 классы): поиск формулировок ФГОС/ФОП/ФРП, аналитика оценок, расчёт учебных часов, импорт школьных шаблонов.",
     websiteUrl: "https://github.com/knottasoft/teacher-assistant",
-    version: "1.0.3",
+    version: "1.0.4",
 });
 // Register tools
 registerFgosLookupTool(server);

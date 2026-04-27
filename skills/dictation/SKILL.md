@@ -1,6 +1,6 @@
 ---
 name: dictation
-description: Use when teacher needs a dictation text (диктант) — controlled, explanatory, vocabulary, preventive, или selective — для русского языка, by class (5-11) and orthographic theme. Produces dictation text + grammatical task + grading norms (нормы оценивания диктанта). Triggers: «диктант», «контрольный диктант», «словарный диктант», «текст для диктанта», «проверочный диктант по теме».
+description: Use whenever a dictation text (диктант) is being produced for русский язык — INCLUDING as a sub-deliverable («сделай диктант к уроку», «материалы к уроку с диктантом», «пакет: диктант + грамматическое задание»). Activate on ANY mention of «диктант», «контрольный диктант», «словарный диктант», «текст для диктанта», «проверочный диктант», «объяснительный диктант», «предупредительный диктант», «выборочный диктант». INVOKE this skill via the Skill tool — do not write a dictation inline even when it is a sub-step of a bigger task; call the skill, use its output. Output: dictation text + grammatical task + grading norms (нормы оценивания диктанта), 5-11 class, by orthographic theme.
 argument-hint: "[класс] [тема/орфограммы]"
 allowed-tools: Read, Write
 ---

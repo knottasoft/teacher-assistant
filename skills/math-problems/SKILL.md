@@ -1,6 +1,6 @@
 ---
 name: math-problems
-description: Use when teacher needs math problems generated for a class and theme with full step-by-step solutions — covers базовый/повышенный/высокий levels, suitable for ДЗ, классной работы, контрольной, ОГЭ/ЕГЭ-подготовки. Triggers: «задачи по математике», «задачи на тему», «генерируй задачи», «примеры задач».
+description: Use whenever math problems for a class and theme are being generated — INCLUDING as a sub-deliverable («задачи к уроку», «материалы к контрольной: задачи + решения», «пакет задач», «карточки к занятию»). Activate on ANY mention of «задачи по математике», «задачи на тему», «генерируй задачи», «примеры задач», «задачник по теме», «составь задачи», «задачи к ДЗ», «задачи к контрольной». INVOKE this skill via the Skill tool — do not invent problems inline; call the skill, use its output. Output: задачи с full step-by-step solutions, covering базовый/повышенный/высокий levels, suitable for ДЗ, классной работы, контрольной, ОГЭ/ЕГЭ-подготовки.
 argument-hint: "[класс] [тема] [количество]"
 allowed-tools: Read, Write
 ---
