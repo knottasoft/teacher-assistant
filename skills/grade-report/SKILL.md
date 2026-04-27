@@ -1,6 +1,6 @@
 ---
 name: grade-report
-description: Use when analyzing student grades from electronic journal exports (МЭШ, Дневник.ру, ЭлЖур, Сетевой Город — XLSX/CSV) or simple `ФИО,5,4,3,...`. Computes class average, quality of knowledge, success rate, students at risk; ФИО анонимизированы.
+description: Use when a teacher needs анализ успеваемости класса (отчёт по успеваемости, средний балл, качество знаний, группа риска) — from electronic journal exports (МЭШ, Дневник.ру, ЭлЖур, Сетевой Город — XLSX/CSV) or simple `ФИО,5,4,3,...`. ФИО анонимизированы в LLM-промптах.
 argument-hint: "[путь к XLSX/CSV/JSON, или 'ввести вручную']"
 allowed-tools: Read, Write, Skill, mcp__plugin_teacher-assistant_teacher__grade_analytics
 ---
