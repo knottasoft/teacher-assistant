@@ -1,6 +1,6 @@
 ---
 name: physics-lab
-description: Use whenever an instruction sheet for a physics laboratory work is being produced — INCLUDING as a sub-deliverable («материалы к лабораторной», «пакет: инструкция + бланк отчёта», «материалы к открытому уроку с практической работой»). Activate on ANY mention of «лабораторная по физике», «инструкция к лабораторной», «лабораторная работа», «опыт по физике», «практикум по физике», «методичка к лабораторной». INVOKE this skill via the Skill tool — do not write lab instructions inline; call the skill, use its output. Output: оборудование (только школьный набор), порядок выполнения, таблицы измерений, расчёт погрешностей (10-11 класс), контрольные вопросы.
+description: Use when a teacher needs an instruction sheet for a физическая лабораторная работа. Covers оборудование (только школьный набор), порядок выполнения, таблицы измерений, расчёт погрешностей (10-11 кл), и контрольные вопросы.
 argument-hint: "[класс] [тема лабораторной]"
 allowed-tools: Read, Write
 ---

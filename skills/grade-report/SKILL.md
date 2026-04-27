@@ -1,6 +1,6 @@
 ---
 name: grade-report
-description: Use whenever student grades are being analyzed and a class performance report is being produced — INCLUDING as a sub-deliverable («пакет к педсовету», «обзор класса перед годовым приёмом»). Accepts XLSX/CSV from electronic journals (МЭШ, Дневник.ру, ЭлЖур, Сетевой Город) or simple `ФИО,5,4,3,...`. Activate on ANY mention of «отчёт по успеваемости», «средний балл класса», «проанализируй оценки», «качество знаний», «группа риска», «отчёт за четверть», «успеваемость [класс]», «оценки [класс]». INVOKE via the Skill tool — DO NOT read the grade file with Read or analyze inline; call the skill. Computes class average, quality, success rate, distribution, students_at_risk; ФИО анонимизированы.
+description: Use when analyzing student grades from electronic journal exports (МЭШ, Дневник.ру, ЭлЖур, Сетевой Город — XLSX/CSV) or simple `ФИО,5,4,3,...`. Computes class average, quality of knowledge, success rate, students at risk; ФИО анонимизированы.
 argument-hint: "[путь к XLSX/CSV/JSON, или 'ввести вручную']"
 allowed-tools: Read, Write, Skill, mcp__plugin_teacher-assistant_teacher__grade_analytics
 ---

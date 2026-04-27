@@ -1,6 +1,6 @@
 ---
 name: fgos-check
-description: Use whenever a teaching document (lesson plan, программа, КТП, рабочая программа) is being checked for ФГОС/ФОП/ФРП compliance — INCLUDING as a sub-deliverable in compound audits («что не так с программой», «состояние рабочей программы», «аудит к педсовету», «оценка готовности перед годовым приёмом»). Activate on ANY mention of «проверь на ФГОС», «соответствие ФГОС/ФОП», «аудит программы», «проверка КТП», «привести к ФГОС», «что не так с программой», «состояние программы», «годовой приём программы». INVOKE via the Skill tool — do not eyeball compliance inline; call the skill, use its checklist. Output: checklist report with issues, missing fields, recommendations referencing actual ФГОС/ФОП/ФРП документы.
+description: Use when checking a teaching document (план урока, КТП, рабочая программа) for ФГОС/ФОП/ФРП compliance — including аудит программы and перед годовым приёмом. Outputs a checklist with issues and recommendations.
 argument-hint: "[путь к файлу]"
 allowed-tools: Read, mcp__plugin_teacher-assistant_teacher__fgos_lookup
 ---

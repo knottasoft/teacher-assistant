@@ -1,6 +1,6 @@
 ---
 name: essay-evaluate
-description: Use whenever a student's essay (сочинение / эссе) is being evaluated, graded, or reviewed — INCLUDING as a sub-deliverable in compound reviews («разбор серии сочинений», «оценить пакет работ к экзамену», «материалы к консилиуму»). Supports school essay, ОГЭ formats (9.1, 9.2, 9.3), итоговое сочинение (11 класс), ЕГЭ задание 27 (русский язык). Activate on ANY mention of «оцени сочинение», «проверь сочинение», «комментарий к сочинению», «разбор итогового сочинения», «проверить эссе», «оценка эссе по критериям», «проверка работ ОГЭ/ЕГЭ». INVOKE this skill via the Skill tool — do not grade essays inline; call the skill, use its output. Returns grade by official ФИПИ criteria with detailed per-criterion comments.
+description: Use when evaluating, grading, or reviewing a student's сочинение — supports school essay, ОГЭ 9.1/9.2/9.3, итоговое сочинение (11 кл), and ЕГЭ задание 27 (русский). Returns grade by official ФИПИ criteria with per-criterion comments.
 argument-hint: "[путь к файлу или текст сочинения]"
 allowed-tools: Read, Write
 ---

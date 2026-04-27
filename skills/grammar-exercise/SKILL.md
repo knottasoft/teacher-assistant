@@ -1,6 +1,6 @@
 ---
 name: grammar-exercise
-description: Use whenever grammar exercises in Russian language are being produced — INCLUDING as a sub-deliverable («упражнения к уроку по правилу», «материалы к занятию: правило + упражнения», «пакет упражнений к контрольной»). Activate on ANY mention of «упражнение по грамматике», «задания на правописание», «упражнения на тему», «отработать правило», «упражнения по русскому», «упражнения на повторение», «карточки по орфографии». INVOKE this skill via the Skill tool — do not invent exercises inline; call the skill, use its output. Output: набор упражнений с разбором правила, заданиями на повторение и самопроверку, by class and theme.
+description: Use when a teacher needs grammar exercises in русский язык for a specific rule, by class and theme. Produces упражнения с разбором правила и заданиями на повторение и самопроверку.
 argument-hint: "[класс] [тема]"
 allowed-tools: Read, Write
 ---

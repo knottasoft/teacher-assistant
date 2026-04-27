@@ -1,6 +1,6 @@
 ---
 name: assignment
-description: Use whenever a class assignment, homework, classwork, control work, test, quiz, worksheet, or handout is being produced — INCLUDING as a sub-deliverable in compound requests («раздатка к уроку», «пакет с квизом», «материалы к занятию», «карточки к открытому уроку»). Activate on ANY mention of «задание», «домашнее задание», «дз», «контрольная», «классная работа», «самостоятельная», «тест», «квиз», «раздатка», «раздаточный материал», «карточка с заданиями», «рабочий лист». INVOKE via the Skill tool — do not invent assignments inline even inside a unified package; call the skill, use its output. Output: задания с ключами ответов, шкалой оценивания, привязкой к теме урока и ФГОС.
+description: Use when a teacher needs a class assignment, homework, control work, test, quiz, или раздаточный материал by subject, class, and theme. Produces задания с ключами и шкалой оценивания, привязанные к ФГОС.
 argument-hint: "[предмет] [класс] [тема] [тип: тест|дз|контрольная|классная|раздатка|квиз]"
 allowed-tools: Read, Write, mcp__plugin_teacher-assistant_teacher__fgos_lookup
 ---
