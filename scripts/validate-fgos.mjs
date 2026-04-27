@@ -12,12 +12,9 @@ import { fileURLToPath } from "url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(__dirname, "..", "mcp-server", "src", "data", "fgos");
 
-const REQUIRED_SUBJECTS = ["russian", "math", "physics", "literature"];
+const REQUIRED_SUBJECTS = ["literature"];
 
 const GRADE_RANGES = {
-  russian: [5, 6, 7, 8, 9, 10, 11],
-  math: [5, 6, 7, 8, 9, 10, 11],
-  physics: [7, 8, 9, 10, 11],
   literature: [5, 6, 7, 8, 9, 10, 11],
 };
 
