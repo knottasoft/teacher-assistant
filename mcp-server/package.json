@@ -1,6 +1,6 @@
 {
   "name": "@knottasoft/teacher-assistant-mcp",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "MCP server for Teacher Assistant — literature FGOS lookup, grade analytics, academic hours calculator, custom template import",
   "type": "module",
   "main": "dist/index.js",
