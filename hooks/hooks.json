@@ -12,7 +12,7 @@
     ],
     "PreToolUse": [
       {
-        "matcher": "mcp__teacher__.*",
+        "matcher": "mcp__plugin_teacher-assistant_teacher__.*",
         "hooks": [
           {
             "type": "command",

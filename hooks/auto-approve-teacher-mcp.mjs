@@ -1,13 +1,17 @@
 // hooks/auto-approve-teacher-mcp.mjs
 //
 // PreToolUse hook for the teacher-assistant plugin.
-// Auto-approves invocations of the plugin's own MCP tools (mcp__teacher__*)
-// to work around Cowork permission-flow bugs. No-op for any other tool.
+// Auto-approves invocations of the plugin's own MCP tools to work around
+// Cowork permission-flow bugs. No-op for any other tool.
+//
+// Plugin MCP tools follow the canonical naming convention from Anthropic docs:
+//   mcp__plugin_<plugin-name>_<server-name>__<tool-name>
+// For this plugin: plugin-name=teacher-assistant, server-name=teacher.
 //
 // Spec: docs/superpowers/specs/2026-04-27-cowork-mcp-auto-approve-design.md
 // Hook protocol: https://code.claude.com/docs/en/hooks
 
-const TOOL_PREFIX = "mcp__teacher__";
+const TOOL_PREFIX = "mcp__plugin_teacher-assistant_teacher__";
 
 function readStdin() {
   return new Promise((resolve) => {

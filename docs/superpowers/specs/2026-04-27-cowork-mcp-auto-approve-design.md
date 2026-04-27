@@ -49,7 +49,31 @@
 
 ### 5.1. Новый файл: `hooks/auto-approve-teacher-mcp.mjs`
 
-Минимальный node-скрипт без зависимостей. Читает stdin, парсит JSON, проверяет `tool_name` совпадает с `mcp__teacher__*`, эмитит JSON-grant и выходит с кодом 0. На любой ошибке парсинга или несовпадение — выходит с кодом 0 без stdout (это означает «нет мнения», диалог идёт штатно).
+Минимальный node-скрипт без зависимостей. Читает stdin, парсит JSON, проверяет `tool_name` совпадает с каноничным префиксом нашего plugin-MCP-сервера, эмитит JSON-grant и выходит с кодом 0. На любой ошибке парсинга или несовпадение — выходит с кодом 0 без stdout (это означает «нет мнения», диалог идёт штатно).
+
+**Каноничный префикс:** `mcp__plugin_teacher-assistant_teacher__`
+
+Источник: официальная документация Claude Code (`plugins/plugin-dev/skills/mcp-integration/SKILL.md` в `anthropics/claude-code`):
+
+> MCP tools follow a standardized naming convention: `mcp__plugin_<plugin-name>_<server-name>__<tool-name>`.
+
+Для нас:
+- `<plugin-name>` = `teacher-assistant` (из `.claude-plugin/plugin.json` → `name`)
+- `<server-name>` = `teacher` (из `mcp-server/src/index.ts:14` → `name: "teacher"` в `new McpServer({...})`)
+- `<tool-name>` ∈ {`fgos_lookup`, `grade_analytics`, `hours_calculator`, `export_docx`, `import_template`} (из `server.tool(...)` вызовов)
+
+Полные имена пяти инструментов:
+- `mcp__plugin_teacher-assistant_teacher__fgos_lookup`
+- `mcp__plugin_teacher-assistant_teacher__grade_analytics`
+- `mcp__plugin_teacher-assistant_teacher__hours_calculator`
+- `mcp__plugin_teacher-assistant_teacher__export_docx`
+- `mcp__plugin_teacher-assistant_teacher__import_template`
+
+Подтверждено независимыми источниками:
+- В `vm_bundles/claudevm.bundle/sessiondata.img` Cowork встречается **только** эта форма (grep).
+- В Cowork UI инструменты группируются под карточкой "teacher-assistant plugin: teacher" с короткими именами (`fgos_lookup` и т.д.) — внутреннее же permission-имя — длинное.
+
+Альтернативный путь установки `claude mcp add teacher -- ...` (документирован в README) даёт другую форму (`mcp__teacher__*`), но это user-MCP, не plugin-MCP, и под этот хук он не подпадает по дизайну: пользователь, явно регистрирующий MCP-сервер через CLI, сам отвечает за permissions через `claude mcp add ... --scope`. Hook-уровень auto-approve работает строго для plugin-install сценария.
 
 **Контракт:**
 - Вход: stdin — JSON события PreToolUse (поля как минимум `tool_name`, `tool_input`).
@@ -60,7 +84,7 @@
 **Что хук НЕ делает:**
 - Не модифицирует `tool_input` (`updatedInput` не используется).
 - Не пишет на диск, не зовёт сеть, не логирует ничего постоянного. Stderr допустим только для отладки (по env-переменной `TEACHER_HOOK_DEBUG`).
-- Не пытается авто-апрувить что-либо вне префикса `mcp__teacher__`.
+- Не пытается авто-апрувить что-либо, чьё имя не начинается ровно с указанного префикса. Сравнение через `startsWith` с трейлинг `__`, поэтому, например, `mcp__plugin_teacher-assistant_teacher_other__foo` (близкое имя другого сервера в том же плагине, гипотетически) **не** совпадёт.
 
 ### 5.2. Регистрация в `hooks/hooks.json`
 
@@ -72,7 +96,7 @@
     "SessionStart": [/* существующий */],
     "PreToolUse": [
       {
-        "matcher": "mcp__teacher__.*",
+        "matcher": "mcp__plugin_teacher-assistant_teacher__.*",
         "hooks": [
           {
             "type": "command",
@@ -86,7 +110,7 @@
 }
 ```
 
-Матчер `mcp__teacher__.*` — это первый фильтр от Claude Code (regex по `tool_name`). Хук всё равно проверяет имя сам как defense-in-depth, на случай неточностей в матчере между версиями.
+Матчер — первый фильтр от Claude Code (regex по `tool_name`). Хук всё равно проверяет префикс сам как defense-in-depth, на случай неточностей в матчере между версиями.
 
 ### 5.3. Удалить дубль `.mcp.json`
 
@@ -124,12 +148,14 @@
 Новый файл `mcp-server/src/__tests__/hooks/auto-approve.test.ts`. Существующий vitest-конфиг в `mcp-server/vitest.config.ts` уже подхватит его. Тест запускает сам скрипт `${REPO_ROOT}/hooks/auto-approve-teacher-mcp.mjs` через `child_process.spawnSync('node', [scriptPath], { input: jsonStdin })` — так мы валидируем реальный CLI-контракт хука, а не только его внутреннюю функцию. Путь к скрипту резолвится через `path.resolve(__dirname, '../../../../hooks/auto-approve-teacher-mcp.mjs')`. Это сохраняет тестовую инфраструктуру в одном месте (`mcp-server/`), хотя сам хук физически живёт в `hooks/` плагина — таково требование plugin-структуры.
 
 Кейсы (минимум):
-1. `tool_name = "mcp__teacher__fgos_lookup"` → stdout содержит `permissionDecision: "allow"`, exit 0.
-2. `tool_name = "mcp__teacher__grade_analytics"` → allow.
-3. `tool_name = "Bash"` → пустой stdout, exit 0.
-4. `tool_name = "mcp__other_server__tool"` → пустой stdout, exit 0.
-5. Невалидный JSON на stdin → пустой stdout, exit 0 (не падаем).
-6. Пустой stdin → пустой stdout, exit 0.
+1. `tool_name = "mcp__plugin_teacher-assistant_teacher__fgos_lookup"` → stdout содержит `permissionDecision: "allow"`, exit 0.
+2. `tool_name = "mcp__plugin_teacher-assistant_teacher__grade_analytics"` → allow.
+3. `tool_name = "mcp__plugin_teacher-assistant_teacher__export_docx"` → allow.
+4. `tool_name = "Bash"` → пустой stdout, exit 0.
+5. `tool_name = "mcp__plugin_other-plugin_other__tool"` → пустой stdout, exit 0.
+6. `tool_name = "mcp__teacher__fgos_lookup"` (короткая форма user-MCP `claude mcp add` — НЕ наш plugin-install) → пустой stdout, exit 0. Это by design: user-MCP проходит через стандартный flow.
+7. Невалидный JSON на stdin → пустой stdout, exit 0 (не падаем).
+8. Пустой stdin → пустой stdout, exit 0.
 
 ### 6.2. Smoke-тест в Claude Code CLI
 
@@ -172,9 +198,9 @@
 
 ## 9. Критерии приёмки
 
-- В Cowork сценарий «план урока «Капитанская дочка», 8 класс» проходит без ошибок «User rejected», `fgos_lookup` отрабатывает, в plan присутствуют точные формулировки УУД из ФРП-2025.
+- В Cowork сценарий «план урока «Капитанская дочка», 8 класс» проходит без ошибок «User rejected», `fgos_lookup` (под именем `mcp__plugin_teacher-assistant_teacher__fgos_lookup` — длинная форма, подтверждено grep'ом по Cowork sessiondata) отрабатывает, в plan присутствуют точные формулировки УУД из ФРП-2025.
 - В Claude Code CLI ничего не сломано: skills работают, остальные хуки работают, тесты зелёные.
-- Юнит-тесты хука зелёные (минимум 6 кейсов из 6.1).
+- Юнит-тесты хука зелёные (минимум 8 кейсов из 6.1).
 - README содержит секцию «Permissions and trust» с явным перечислением, что авто-апрувится.
 - Версия плагина в обоих манифестах — `1.0.1`.
 - В репо нет файла `.mcp.json` (удалён, конфиг живёт в `plugin.json`).
