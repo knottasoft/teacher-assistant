@@ -1,6 +1,6 @@
 ---
 name: essay-topics
-description: Use when a teacher needs essay topics for a literature work or направления итогового сочинения. Outputs a list of topics with assessment criteria, recommendations, and ОГЭ/ЕГЭ-aligned wording.
+description: Use when a teacher needs темы сочинений по произведению или направления итогового сочинения (11 кл). Outputs a list of topics with assessment criteria, recommendations, and ОГЭ/ЕГЭ-aligned wording.
 argument-hint: "[класс] [произведение или направление]"
 allowed-tools: Read, Write
 ---

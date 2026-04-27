@@ -1,6 +1,6 @@
 ---
 name: check-work
-description: Use when checking, grading, or commenting on a student's submitted work. Returns 5-балльная или критериальная оценка with structured feedback per педагогический подход. (Sibling skills: essay-evaluate for сочинений, math-check for математики.)
+description: Use when a teacher needs проверить работу ученика — выставить оценку, прокомментировать, разобрать ошибки. Returns 5-балльная или критериальная оценка with structured feedback (положительное → ошибки → рекомендации) per педагогический подход. For сочинений по литературе use essay-evaluate.
 argument-hint: "[путь к файлу или текст работы]"
 allowed-tools: Read, Write
 ---

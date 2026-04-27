@@ -1,6 +1,6 @@
 ---
 name: literature-questions
-description: Use when a teacher needs comprehension questions for analysis of a literature work. Outputs questions of varied difficulty (базовые, проблемные, сравнительные, для дискуссии) covering сюжет, образы героев, авторскую позицию, художественные средства.
+description: Use when a teacher needs вопросы к произведению (для анализа на уроке, разбора, дискуссии) — questions of varied difficulty (базовые, проблемные, сравнительные) covering сюжет, образы героев, авторскую позицию, художественные средства.
 argument-hint: "[класс] [автор] [произведение]"
 allowed-tools: Read, Write
 ---
