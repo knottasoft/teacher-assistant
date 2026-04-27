@@ -49,21 +49,42 @@ jobs:
 
       - name: Check all SKILL.md files have required frontmatter
         run: |
+          # Required: name, description (per Anthropic skill spec).
+          # Optional: argument-hint (only for slash-commandable skills),
+          # allowed-tools, user-invocable, disable-model-invocation.
+          # Best practice: skills that auto-activate via description
+          # (e.g. validate-teaching-document) don't need argument-hint.
           errors=0
+          warnings=0
           for skill in skills/*/SKILL.md; do
             if ! head -1 "$skill" | grep -q '^---'; then
               echo "ERROR: $skill missing YAML frontmatter"
               errors=$((errors + 1))
             fi
-            for field in name description argument-hint; do
+            for field in name description; do
               if ! grep -q "^${field}:" "$skill"; then
-                echo "ERROR: $skill missing field: $field"
+                echo "ERROR: $skill missing required field: $field"
                 errors=$((errors + 1))
               fi
             done
+            desc_line=$(grep -m1 '^description:' "$skill" | sed 's/^description:[[:space:]]*//')
+            desc_len=${#desc_line}
+            if [ "$desc_len" -gt 1024 ]; then
+              echo "ERROR: $skill description is $desc_len chars (max 1024)"
+              errors=$((errors + 1))
+            fi
+            if ! grep -q '^argument-hint:' "$skill"; then
+              if grep -q '^disable-model-invocation: true' "$skill"; then
+                :
+              else
+                echo "WARN: $skill has no argument-hint (OK for auto-activating skills)"
+                warnings=$((warnings + 1))
+              fi
+            fi
           done
+          echo "---"
+          echo "Errors: $errors, warnings: $warnings"
           if [ $errors -gt 0 ]; then
-            echo "Found $errors errors in skill files"
             exit 1
           fi
           echo "All skill files valid"
