@@ -1,6 +1,6 @@
 ---
 name: assignment
-description: Use when a teacher needs задание для класса (домашнее задание, контрольная, тест, квиз, раздаточный материал, рабочий лист) by class and theme. Produces задания с ключами ответов и шкалой оценивания, привязанные к ФГОС.
+description: Use when creating a class assignment — задание для урока, домашнее задание, контрольная, тест, квиз, раздаточный материал, рабочий лист. Produces задания с ключами ответов и шкалой оценивания, привязанные к ФГОС.
 argument-hint: "[предмет] [класс] [тема] [тип: тест|дз|контрольная|классная|раздатка|квиз]"
 allowed-tools: Read, Write, mcp__plugin_teacher-assistant_teacher__fgos_lookup
 ---
