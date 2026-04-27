@@ -1,47 +1,42 @@
 {
-  "mcpb_version": "0.1",
+  "manifest_version": "0.3",
   "name": "teacher-assistant",
   "display_name": "Учитель — Ассистент преподавателя",
-  "version": "1.0.0",
-  "description": "AI-ассистент для преподавателей школы (5-11 классы). ФГОС, планы уроков, задания, проверка работ, КТП.",
-  "long_description": "Плагин для Claude Desktop — помощник преподавателя средней и старшей школы. Создаёт планы уроков, задания, проверяет работы учеников, формирует календарно-тематическое планирование, анализирует успеваемость. Поддерживает 4 предмета (Русский язык, Математика, Физика, Литература) для 5-11 классов. Все материалы соответствуют ФГОС ООО и ФГОС СОО.",
+  "version": "1.1.0",
+  "description": "AI-ассистент преподавателей российской школы (5-11 классы). XLSX-аналитика журнала МЭШ/Дневник.ру/ЭлЖур, планы уроков, КТП, ФГОС/ФОП.",
+  "long_description": "Плагин-расширение для Claude Desktop — помощник преподавателя средней и старшей школы. Создаёт планы уроков, задания, проверяет работы учеников, формирует календарно-тематическое планирование, анализирует успеваемость. Принимает реальный экспорт XLSX/CSV из электронных журналов МЭШ, Дневник.ру, Сетевой Город, ЭлЖур (с автодетекцией кодировки UTF-8/Windows-1251 и multi-line cells). Поддерживает 4 предмета (Русский язык, Математика, Физика, Литература) для 5-11 классов. Все материалы соответствуют ФГОС ООО (приказ Минпросвещения №287/2021), ФГОС СОО (приказ Минобрнауки №413/2012 в действующей редакции), ФОП ООО (№370/2023) и ФОП СОО (№371/2023). По умолчанию анонимизирует ФИО учеников при отправке в LLM.",
   "author": {
     "name": "knottasoft",
     "url": "https://github.com/knottasoft"
   },
   "license": "MIT",
   "homepage": "https://github.com/knottasoft/teacher-assistant",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/knottasoft/teacher-assistant"
+  },
+  "keywords": ["teacher", "education", "school", "russian-education", "fgos", "fop", "lesson-plan", "grade-analytics", "mes", "dnevnik-ru"],
   "server": {
     "type": "node",
     "entry_point": "mcp-server/dist/bundle.js",
     "mcp_config": {
       "command": "node",
-      "args": ["mcp-server/dist/bundle.js"],
+      "args": ["${__dirname}/mcp-server/dist/bundle.js"],
       "env": {
         "NODE_ENV": "production"
       }
     }
   },
   "tools": [
-    {
-      "name": "fgos_lookup",
-      "description": "Поиск требований ФГОС по предмету, классу и теме"
-    },
-    {
-      "name": "export_docx",
-      "description": "Конвертация Markdown в DOCX для печати"
-    },
-    {
-      "name": "import_template",
-      "description": "Импорт пользовательского шаблона документа"
-    },
-    {
-      "name": "hours_calculator",
-      "description": "Расчёт учебных часов за период"
-    },
-    {
-      "name": "grade_analytics",
-      "description": "Статистический анализ оценок класса"
+    { "name": "fgos_lookup",      "description": "Поиск требований ФГОС/ФОП по предмету, классу и теме (планируемые результаты, УУД, виды контроля)" },
+    { "name": "grade_analytics",  "description": "Аналитика оценок класса: XLSX/CSV из любого электронного журнала, период/тип работ, анонимизация ФИО" },
+    { "name": "hours_calculator", "description": "Расчёт учебных часов за период с учётом ФРП и календаря" },
+    { "name": "export_docx",      "description": "Конвертация Markdown-отчёта/плана в DOCX для печати/загрузки в систему школы" },
+    { "name": "import_template",  "description": "Импорт пользовательского шаблона документа (план урока, отчёт, КТП) для генерации в нужном формате" }
+  ],
+  "compatibility": {
+    "runtimes": {
+      "node": ">=18.0.0"
     }
-  ]
+  }
 }
