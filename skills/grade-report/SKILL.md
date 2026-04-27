@@ -2,7 +2,7 @@
 name: grade-report
 description: Use when teacher needs to analyze student grades and produce a structured class performance report — accepts native exports from electronic journals (МЭШ, Дневник.ру, Сетевой Город, ЭлЖур: XLSX, CSV with header), simple CSV `ФИО,5,4,3,...`, or JSON. Computes class average, quality of knowledge (% on 4-5), success rate (% no 2), distribution, students_at_risk, top students; supports period and work-type filters; anonymizes ФИО in LLM prompt by default. Triggers: «отчёт по успеваемости», «аналитика журнала», «средний балл класса», «проанализируй оценки», «качество знаний», «группа риска», «отчёт за четверть».
 argument-hint: "[путь к XLSX/CSV/JSON, или 'ввести вручную']"
-allowed-tools: Read, Write, mcp__plugin_teacher-assistant_teacher__grade_analytics, mcp__plugin_teacher-assistant_teacher__export_docx
+allowed-tools: Read, Write, Skill, mcp__plugin_teacher-assistant_teacher__grade_analytics
 ---
 
 # Анализ успеваемости и отчёт
@@ -117,8 +117,9 @@ grade_analytics («Ученик #1»). При записи итогового MD
   1. собери текст отчёта с псевдонимами,
   2. в самый последний шаг перед `Write` сделай замену
      `Ученик #N → name_map["Ученик #N"]` локально,
-  3. запиши файл `отчёт_успеваемость_<класс>.md` (или с PDF через
-     mcp__plugin_teacher-assistant_teacher__export_docx).
+  3. запиши файл `отчёт_успеваемость_<класс>.md`. Если учитель попросит
+     DOCX — вызови встроенный `anthropic-skills:docx` с параметрами ГОСТ
+     из [.claude/rules/document-formatting.md](../../.claude/rules/document-formatting.md).
 
 Если учитель явно сказал «работай с псевдонимами и в файле» (например,
 для отправки во внешнюю систему) — оставь псевдонимы.

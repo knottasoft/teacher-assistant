@@ -2,7 +2,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { registerFgosLookupTool } from "./tools/fgos-lookup.js";
-import { registerExportDocxTool } from "./tools/export-docx.js";
 import { registerImportTemplateTool } from "./tools/import-template.js";
 import { registerHoursCalculatorTool } from "./tools/hours-calculator.js";
 import { registerGradeAnalyticsTool } from "./tools/grade-analytics.js";
@@ -14,7 +13,6 @@ const server = new McpServer({
 });
 // Register tools
 registerFgosLookupTool(server);
-registerExportDocxTool(server);
 registerImportTemplateTool(server);
 registerHoursCalculatorTool(server);
 registerGradeAnalyticsTool(server);

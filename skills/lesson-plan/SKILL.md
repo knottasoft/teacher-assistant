@@ -2,7 +2,7 @@
 name: lesson-plan
 description: Use when teacher needs to prepare a lesson plan, lesson outline, lesson notes, methodical materials, or teaching notes for a school subject (русский язык, математика, физика, литература, 5-11 класс) — produces a ФГОС/ФОП-aligned plan with objectives, planned results (предметные/метапредметные/личностные), УУД, ход урока по этапам системно-деятельностного подхода, differentiated tasks and homework. Triggers: «план урока», «конспект урока», «методичка к уроку», «подготовить урок», «материалы к уроку», «план занятия», «разработка урока», «технологическая карта урока». Use even when user only mentions one of these triggers in a multi-part request.
 argument-hint: "[предмет] [класс] [тема]"
-allowed-tools: Read, Write, mcp__plugin_teacher-assistant_teacher__fgos_lookup, mcp__plugin_teacher-assistant_teacher__export_docx
+allowed-tools: Read, Write, Skill, mcp__plugin_teacher-assistant_teacher__fgos_lookup
 ---
 
 # Создание плана урока
@@ -24,7 +24,7 @@ allowed-tools: Read, Write, mcp__plugin_teacher-assistant_teacher__fgos_lookup, 
 6. Включи дифференцированные задания (базовый/повышенный уровень)
 7. Добавь домашнее задание (обязательное + по выбору)
 8. Сохрани план в файл `урок_[предмет]_[класс]_[тема].md`
-9. Предложи экспорт в DOCX через `/export-doc`
+9. Если учитель попросит DOCX — вызывай встроенный `anthropic-skills:docx` с параметрами ГОСТ из [.claude/rules/document-formatting.md](../../.claude/rules/document-formatting.md) (Times New Roman 12pt, поля 3см/1.5см/2см/2см, A4)
 
 Если предмет или тема не указаны, спроси у пользователя.
 

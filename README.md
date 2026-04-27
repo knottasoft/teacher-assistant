@@ -63,15 +63,16 @@ npm install @knottasoft/teacher-assistant
 
 ## Разрешения и доверие
 
-Плагин содержит локальный MCP-сервер `teacher` с пятью инструментами. При установке через Claude Code / Cowork их каноничные имена (по схеме `mcp__plugin_<plugin>_<server>__<tool>`):
+Плагин содержит локальный MCP-сервер `teacher` с четырьмя инструментами. При установке через Claude Code / Cowork их каноничные имена (по схеме `mcp__plugin_<plugin>_<server>__<tool>`):
 
 - `mcp__plugin_teacher-assistant_teacher__fgos_lookup` — поиск формулировок ФГОС/ФОП/ФРП
 - `mcp__plugin_teacher-assistant_teacher__grade_analytics` — анализ оценок (CSV/XLSX, в т.ч. cp1251)
 - `mcp__plugin_teacher-assistant_teacher__hours_calculator` — расчёт учебных часов
-- `mcp__plugin_teacher-assistant_teacher__export_docx` — экспорт markdown в DOCX
 - `mcp__plugin_teacher-assistant_teacher__import_template` — импорт пользовательских шаблонов
 
-Чтобы инструменты работали без диалогов разрешений (особенно в Claude Cowork, где штатный permission-флоу для plugin-MCP нестабилен), плагин включает **PreToolUse-хук** `hooks/auto-approve-teacher-mcp.mjs`. Хук авто-апрувит **только** вызовы своих собственных пяти инструментов и ничего больше.
+DOCX-экспорт выполняется встроенным навыком `anthropic-skills:docx` — наш плагин им только пользуется, ничего не дублируя.
+
+Чтобы инструменты работали без диалогов разрешений (особенно в Claude Cowork, где штатный permission-флоу для plugin-MCP нестабилен), плагин включает **PreToolUse-хук** `hooks/auto-approve-teacher-mcp.mjs`. Хук авто-апрувит **только** вызовы своих собственных четырёх инструментов и ничего больше.
 
 **Что плагин НЕ делает автоматически:**
 
@@ -87,7 +88,7 @@ npm install @knottasoft/teacher-assistant
 
 ---
 
-## Команды (18 навыков)
+## Команды (17 навыков)
 
 ### Основные
 
@@ -99,7 +100,6 @@ npm install @knottasoft/teacher-assistant
 | `/thematic-plan` | Календарно-тематическое планирование | `/thematic-plan русский 6 год` |
 | `/fgos-check` | Проверить документ на соответствие ФГОС | `/fgos-check план_урока.md` |
 | `/grade-report` | Анализ успеваемости класса | `/grade-report оценки_7б.csv` |
-| `/export-doc` | Экспорт в DOCX | `/export-doc план_урока.md` |
 | `/import-template` | Импорт шаблона школы | `/import-template шаблон_ктп.md thematic-plan` |
 
 ### Русский язык
@@ -136,17 +136,18 @@ npm install @knottasoft/teacher-assistant
 
 ## MCP-инструменты
 
-Плагин предоставляет MCP-сервер с 5 инструментами и 2 типами ресурсов:
+Плагин предоставляет MCP-сервер с 4 инструментами и 2 типами ресурсов:
 
 ### Инструменты
 
 | Инструмент | Описание |
 |-----------|----------|
 | `fgos_lookup` | Поиск по базе ФГОС: разделы, темы, планируемые результаты, УУД |
-| `export_docx` | Конвертация Markdown → DOCX (Times New Roman 12pt, поля по ГОСТ) |
 | `import_template` | Импорт и анализ пользовательского шаблона |
 | `hours_calculator` | Расчёт учебных часов за период (четверть / полугодие / год) |
 | `grade_analytics` | Анализ успеваемости: средний балл, качество, «группа риска» |
+
+DOCX-экспорт делегирован встроенному `anthropic-skills:docx` — параметры ГОСТ берутся из [.claude/rules/document-formatting.md](.claude/rules/document-formatting.md).
 
 ### Ресурсы
 
@@ -160,7 +161,7 @@ npm install @knottasoft/teacher-assistant
 ## Форматы вывода
 
 - **Markdown** — основной формат, просмотр в Claude Code
-- **DOCX** — экспорт через `/export-doc` (Times New Roman 12pt, поля: 3см лево / 1.5см право / 2см верх-низ)
+- **DOCX** — экспорт через встроенный `anthropic-skills:docx` с ГОСТ-параметрами (Times New Roman 12pt, поля: 3см лево / 1.5см право / 2см верх-низ). Полный список параметров — в [.claude/rules/document-formatting.md](.claude/rules/document-formatting.md)
 
 ## Импорт шаблонов
 
@@ -219,7 +220,7 @@ teacher-assistant/
 │   │   ├── resources/              # Провайдеры ресурсов
 │   │   └── data/fgos/              # Данные ФГОС (JSON)
 │   └── vitest.config.ts
-├── skills/                         # 18 навыков (slash-команд)
+├── skills/                         # 17 навыков (slash-команд)
 ├── hooks/                          # Хуки жизненного цикла
 ├── schemas/                        # JSON Schema для ФГОС-данных
 ├── scripts/                        # Скрипты валидации
