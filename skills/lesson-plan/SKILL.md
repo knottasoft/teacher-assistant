@@ -1,6 +1,6 @@
 ---
 name: lesson-plan
-description: Use when a teacher needs a lesson plan, конспект урока, or технологическая карта for a school subject (русский, математика, физика, литература, 5-11 кл). Produces a ФГОС/ФОП-aligned plan with УУД, целями, и ходом урока.
+description: Use when planning a literature lesson — план урока, конспект урока, технологическая карта (5-11 кл), включая компенсирующий, открытый, итоговый, обобщающий урок. Produces ФГОС/ФОП-aligned plan with УУД, целями, и ходом урока.
 argument-hint: "[предмет] [класс] [тема]"
 allowed-tools: Read, Write, Skill, mcp__plugin_teacher-assistant_teacher__fgos_lookup
 ---

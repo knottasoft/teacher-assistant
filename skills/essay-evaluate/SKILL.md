@@ -1,6 +1,6 @@
 ---
 name: essay-evaluate
-description: Use when evaluating, grading, or reviewing a student's сочинение — supports school essay, ОГЭ 9.1/9.2/9.3, итоговое сочинение (11 кл), and ЕГЭ задание 27 (русский). Returns grade by official ФИПИ criteria with per-criterion comments.
+description: Use when grading a student's essay — оценить сочинение, школьная 5-балльная оценка за содержание и грамотность плюс разбор по критериям ФИПИ для ОГЭ 9.1/9.2/9.3, итогового сочинения (11 кл) или ЕГЭ задания 27.
 argument-hint: "[путь к файлу или текст сочинения]"
 allowed-tools: Read, Write
 ---

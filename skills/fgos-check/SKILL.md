@@ -1,6 +1,6 @@
 ---
 name: fgos-check
-description: Use when checking a teaching document (план урока, КТП, рабочая программа) for ФГОС/ФОП/ФРП compliance — including аудит программы and перед годовым приёмом. Outputs a checklist with issues and recommendations.
+description: Use when auditing a teaching document — проверка соответствия ФГОС/ФОП/ФРП, аудит программы, состояние рабочей программы, проверка КТП, перед годовым приёмом. Outputs checklist with issues, missing fields, and recommendations.
 argument-hint: "[путь к файлу]"
 allowed-tools: Read, mcp__plugin_teacher-assistant_teacher__fgos_lookup
 ---
